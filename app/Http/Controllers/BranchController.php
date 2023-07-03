@@ -15,7 +15,8 @@ use Illuminate\View\View;
 class BranchController extends Controller
 {
     public function index(): View {
-        return view('branch.index');
+        $branches = Branch::all();
+        return view('branch.index', ['count' => $branches->count()]);
     }
 
     public function create(): View {
@@ -23,10 +24,21 @@ class BranchController extends Controller
     }
 
     public function fetch(Request $request): Response {
+        $search = $request->input('search');
+        $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
         $branches = Branch::orderBy('is_active', 'desc')
-                    ->orderBy('id', 'asc')
-                    ->get();
-        return response(['branches' => $branches]);
+                    ->orderBy('id', 'asc');
+        if ($search) {
+            $branches->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+                $query->orWhere('address', 'LIKE', '%' . $search . '%');
+                $query->orWhere('tin', 'LIKE', '%' . $search . '%');
+            });
+        }
+        if ($inactive) {
+            $branches->where('is_active', $inactive);
+        }
+        return response(['branches' => $branches->get()]);
     }
 
     public function edit(Request $request, Branch $branch): View {

@@ -9,7 +9,7 @@
                     <span>{{ $title ?? '' }}</span>
             </div>
             <div class="space-x-1">
-                    {{ $buttons ?? '' }}
+                {{ $buttons ?? '' }}
             </div>
         </div>
     </div>
