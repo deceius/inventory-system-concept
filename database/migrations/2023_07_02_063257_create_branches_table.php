@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('tin');
-            $table->bigInteger('created_by');
-            $table->bigInteger('updated_by')->nullable();
+            $table->string('created_by');
+            $table->string('updated_by')->nullable();
             $table->tinyInteger('is_active')->default(1);
             $table->timestamps();
         });

@@ -22,6 +22,7 @@ class BranchUpdateRequest extends FormRequest
 
     public function getSanitized(): array {
         $sanitized = $this->validated();
+        $sanitized['updated_by'] = $this->user()->email;
         return $sanitized;
     }
 

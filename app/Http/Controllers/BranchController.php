@@ -48,21 +48,21 @@ class BranchController extends Controller
 
     public function update(BranchUpdateRequest $request, Branch $branch): RedirectResponse
     {
-        $branch->fill($request->validated());
+        $branch->fill($request->getSanitized());
         $branch->save();
         return Redirect::route('admin.branch.edit', ['branch' => $branch])->with('status', 'branch-updated');
     }
 
     public function activate(BranchUpdateRequest $request, Branch $branch): RedirectResponse
     {
-        $branch->fill($request->validated());
+        $branch->fill($request->getSanitized());
         $branch->is_active = 1;
         return $this->updateActivation($branch->fill($request->validated()), 'branch-activated');
     }
 
     public function deactivate(BranchUpdateRequest $request, Branch $branch): RedirectResponse
     {
-        $branch->fill($request->validated());
+        $branch->fill($request->getSanitized());
         $branch->is_active = 0;
         return $this->updateActivation($branch, 'branch-deactivated');
     }
@@ -76,7 +76,6 @@ class BranchController extends Controller
     public function store(BranchStoreRequest $request): RedirectResponse
     {
         $sanitized = $request->getSanitized();
-        $sanitized['created_by'] = Auth::user()->id;
         Branch::create($sanitized);
 
         return Redirect::route('admin.branch.index')->with('status', 'branch-created');
