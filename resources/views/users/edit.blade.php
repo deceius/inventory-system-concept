@@ -91,7 +91,7 @@
                     @if (old('isActive', $user->is_active))
                         @include('users.deactivate')
                     @else
-                        @include('branch.activate')
+                        @include('users.activate')
                     @endif
                 </x-slot>
             </x-ui.card>

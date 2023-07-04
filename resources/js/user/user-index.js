@@ -2,7 +2,8 @@ export default () => ({
     isLoading: false,
     filter: {
         'search' : '',
-        'inactive': false
+        'inactive': false,
+        'branch' : ''
     },
     data: [],
     selectedBranch: [],
@@ -26,7 +27,7 @@ export default () => ({
     reloadUsers() {
         this.isLoading = true;
         this.data = [];
-        let url = '/admin/users/fetch?search=' + this.filter.search + '&inactive=' + this.filter.inactive;
+        let url = '/admin/users/fetch?search=' + this.filter.search + '&inactive=' + this.filter.inactive + '&branch=' + this.filter.branch;
         axios.get(url).then(
             response => {
                 this.data = response.data.users;

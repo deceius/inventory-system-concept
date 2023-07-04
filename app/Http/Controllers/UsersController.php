@@ -23,7 +23,8 @@ class UsersController extends Controller
 
     public function index(): View {
         $count = User::count();
-        return view('users.index', ['count' => $count]);
+        $branches = Branch::where('is_active', 1)->get();
+        return view('users.index', ['count' => $count, 'branches' => $branches]);
     }
 
     public function create(): View {
@@ -41,14 +42,18 @@ class UsersController extends Controller
 
     public function fetch(Request $request): Response {
         $search = $request->input('search');
+        $branch = $request->input('branch');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
         $users = User::orderBy('is_active', 'desc')
                     ->orderBy('id', 'asc');
         if ($search) {
-            $users->where(function ($query) use ($search) {
+            $users->where(function ($query) use ($search, $branch) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
                 $query->orWhere('email', 'LIKE', '%' . $search . '%');
             });
+        }
+        if ($branch){
+            $users->where('branch_id', $branch);
         }
         if ($inactive) {
             $users->where('is_active', $inactive);
@@ -66,8 +71,6 @@ class UsersController extends Controller
         return Redirect::route('admin.users.index')->with('status', 'user-created');
     }
 
-
-
     public function update(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $user->fill($request->validated());
@@ -75,5 +78,24 @@ class UsersController extends Controller
         return Redirect::route('admin.users.edit', ['user' => $user])->with('status', 'user-updated');
     }
 
+    public function activate(UserUpdateRequest $request, User $user): RedirectResponse
+    {
+        $user->fill($request->validated());
+        $user->is_active = 1;
+        return $this->updateActivation($user->fill($request->validated()), 'user-activated');
+    }
+
+    public function deactivate(UserUpdateRequest $request, User $user): RedirectResponse
+    {
+        $user->fill($request->validated());
+        $user->is_active = 0;
+        return $this->updateActivation($user, 'user-deactivated');
+    }
+
+    function updateActivation(User $user, $status): RedirectResponse {
+        $user->save();
+        $redirectRoute = $status == 'user-deactivated' ? Redirect::route('admin.users.index') : Redirect::route('admin.users.edit', ['user' => $user]);
+        return $redirectRoute->with('status', $status);
+    }
 
 }

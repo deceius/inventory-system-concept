@@ -29,10 +29,11 @@
                           </svg>
                     </button>
                   </div>
-                  <x-ui.select class="w-full hidden md:block">
-                    <option value="test">Emilia (Silang)</option>
-                    <option value="test">test</option>
-                    <option value="test">test</option>
+                  <x-ui.select x-model="filter.branch" class="w-full hidden md:block" x-on:change="reloadUsers()">
+                    <option value="">All Branches</option>
+                    @foreach ($branches as $branch)
+                        <option value="{{$branch->id}}">{{ $branch->name }}</option>
+                    @endforeach
                   </x-ui.select>
             </div>
             <label for="remember_me" class="inline-flex items-center">
