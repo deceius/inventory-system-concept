@@ -8,7 +8,7 @@
                     {{ $icon ?? '' }}
                     <span>{{ $title ?? '' }}</span>
             </div>
-            <div class="space-x-1 flex items-center">
+            <div class="space-x-2 flex items-center">
                 {{ $buttons ?? '' }}
             </div>
         </div>
