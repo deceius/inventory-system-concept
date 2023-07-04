@@ -110,11 +110,7 @@
                     </x-slot>
                     <x-slot name="content">
                         <x-ui.dropdown.item :href="route('profile.edit')">
-                            {{ __('Switch Branch...') }}
-                        </x-ui.dropdown.item>
-                        <x-ui.separator></x-ui.separator>
-                        <x-ui.dropdown.item :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Update Password') }}
                         </x-ui.dropdown.item>
 
                         <form method="POST" action="{{ route('logout') }}">
