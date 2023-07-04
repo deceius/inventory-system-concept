@@ -65,17 +65,14 @@
                             </form>
                         </x-slot>
                     </x-ui.nav.dropdown>
-                    <x-ui.nav.dropdown>
+                    <x-ui.nav.dropdown :active="request()->routeIs('items.*')">
                         <x-slot name="title">{{ __('Master Data') }}</x-slot>
                         <x-slot name="content">
                             <x-ui.dropdown.item :href="route('profile.edit')">
                                 {{ __('Items') }}
                             </x-ui.dropdown.item>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Types') }}
-                            </x-ui.dropdown.item>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Brands') }}
+                            <x-ui.dropdown.item :href="route('items.settings.index')" :active="request()->routeIs('items.settings.index')">
+                                {{ __('Item Settings') }}
                             </x-ui.dropdown.item>
                             </form>
                         </x-slot>

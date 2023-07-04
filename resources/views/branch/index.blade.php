@@ -34,7 +34,7 @@
                 <span class="ml-2 text-sm text-gray-600">{{ __('Hide Inactive Branches') }}</span>
             </label>
         </x-ui.toolbar>
-        <div class="py-12">
+        <div class="py-6">
             <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
                 <template x-if="!isLoading && !data.length">
                     <x-ui.no-data data="{{ __('Branch')}}"></x-ui.no-data>

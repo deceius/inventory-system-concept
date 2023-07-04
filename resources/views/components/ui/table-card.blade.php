@@ -16,7 +16,7 @@
     <x-ui.separator></x-ui.separator>
     @endisset
 
-    <div {{ $content->attributes->merge(['class' => 'p-6 text-gray-900']) }}>
+    <div {{ $content->attributes->merge(['class' => 'text-gray-900']) }}>
         {{ $content }}
     </div>
 </div>

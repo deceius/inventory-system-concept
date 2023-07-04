@@ -3,6 +3,7 @@
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ItemSettingsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,9 +30,36 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-
     Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
+});
 
+
+/**
+ * Master Data
+ */
+Route::middleware('auth')->group(function () {
+
+    /**
+     * Item Settings
+     */
+     Route::get('/items/settings', [ItemSettingsController::class, 'index'])->name('items.settings.index');
+
+     /**
+      * Items
+      */
+     Route::get('/items/item', [UsersController::class, 'index'])->name('admin.users.index');
+
+
+});
+/**
+ * Admin Auth
+ */
+
+Route::middleware('auth')->group(function () {
+
+    /**
+     * User
+     */
     Route::get('/admin/users', [UsersController::class, 'index'])->name('admin.users.index');
     Route::get('/admin/users/fetch', [UsersController::class, 'fetch'])->name('admin.users.fetch');
     Route::get('/admin/users/create', [UsersController::class, 'create'])->name('admin.users.create');
@@ -42,6 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/admin/users/{user}/deactivate', [UsersController::class, 'deactivate'])->name('admin.users.deactivate');
 
 
+    /**
+     * Branch
+     */
     Route::get('/admin/branch', [BranchController::class, 'index'])->name('admin.branch.index');
     Route::get('/admin/branch/create', [BranchController::class, 'create'])->name('admin.branch.create');
     Route::get('/admin/branch/{branch}/edit', [BranchController::class, 'edit'])->name('admin.branch.edit');

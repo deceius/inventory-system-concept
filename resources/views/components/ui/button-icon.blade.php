@@ -19,6 +19,6 @@ switch ($style) {
 @endphp
 <button type="{{ $type }}" {{ $attributes->merge(['class' => $classes]) }}>
     <div class="flex space-x-2 items-center h-5">
-        {{ $icon ?? '' }}
+        {{ $slot }}
    </div>
   </button>
