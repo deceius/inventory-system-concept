@@ -7,5 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Type extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'name',
+        'created_by',
+        'updated_by',
+        'is_active'
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at',
+    ];
 }

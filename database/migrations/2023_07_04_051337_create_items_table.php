@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedInteger('type_id');
             $table->string('created_by');
             $table->string('updated_by');
+            $table->tinyInteger('is_active')->default(1);
             $table->timestamps();
         });
     }
