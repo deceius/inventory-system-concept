@@ -68,7 +68,7 @@
                     <x-ui.nav.dropdown :active="request()->routeIs('items.*')">
                         <x-slot name="title">{{ __('Master Data') }}</x-slot>
                         <x-slot name="content">
-                            <x-ui.dropdown.item :href="route('profile.edit')">
+                            <x-ui.dropdown.item :href="route('items.index')" :active="request()->routeIs('items.index')">
                                 {{ __('Items') }}
                             </x-ui.dropdown.item>
                             <x-ui.dropdown.item :href="route('items.settings.index')" :active="request()->routeIs('items.settings.index')">

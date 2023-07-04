@@ -14,10 +14,10 @@
     </x-slot>
     <div>
         <div class="py-6">
-            <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 grid lg:grid-cols-2 sm:grid-cols-1 gap-4">
-                <x-ui.table-card x-data="userIndex" x-init="loadUsers()">
+            <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-6">
+                <x-ui.table-card x-data="typesIndex" x-init="loadEverything()">
                     <x-slot name="title">
-                        {{ __('Item Types') }}
+                        {{ __('Types') }}
                     </x-slot>
                     <x-slot name="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -27,15 +27,15 @@
                     <x-slot name="buttons">
                         <div class="space-x-3 flex items-center h-5">
                             <div class="w-full inline-flex items-center bg-white disabled:bg-gray-200 border border-gray-300 rounded-md text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
-                                <input x-model="filter.search" x-on:keyup.enter="reloadUsers()" class="text-sm border-0 px-5 rounded-lg focus:ring-0" type="text" name="search" placeholder="Search">
-                                <button x-on:click="reloadUsers()" type="button" class="px-3 py-2">
+                                <input x-model="filter.search" x-on:keyup.enter="loadTypes()" class="text-sm border-0 px-5 rounded-lg focus:ring-0" type="text" name="search" placeholder="Search">
+                                <button x-on:click="loadTypes()" type="button" class="px-3 py-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                         <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
                                       </svg>
                                 </button>
                               </div>
                         </div>
-                        <x-ui.button-link href="{{ route('admin.users.create') }}" style="success" text="{{ __('Create Item Type') }}">
+                        <x-ui.button-link href="{{ route('admin.users.create') }}" style="success" text="{{ __('Create Type') }}">
                             <x-slot name="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                     <path d="M2 4.25A2.25 2.25 0 014.25 2h2.5A2.25 2.25 0 019 4.25v2.5A2.25 2.25 0 016.75 9h-2.5A2.25 2.25 0 012 6.75v-2.5zM2 13.25A2.25 2.25 0 014.25 11h2.5A2.25 2.25 0 019 13.25v2.5A2.25 2.25 0 016.75 18h-2.5A2.25 2.25 0 012 15.75v-2.5zM11 4.25A2.25 2.25 0 0113.25 2h2.5A2.25 2.25 0 0118 4.25v2.5A2.25 2.25 0 0115.75 9h-2.5A2.25 2.25 0 0111 6.75v-2.5zM15.25 11.75a.75.75 0 00-1.5 0v2h-2a.75.75 0 000 1.5h2v2a.75.75 0 001.5 0v-2h2a.75.75 0 000-1.5h-2v-2z" />
@@ -48,28 +48,24 @@
                             <table id="table" class="min-w-full">
                                     <thead class="font-medium">
                                         <tr class="border-b-2 border-gray-300">
-                                            <th scope="col" class="text-start py-4 px-6">
+                                            <th scope="col" class="text-start py-3 px-5">
                                                 Name
                                             </th>
-                                            <th scope="col" class="text-start py-4 px-6">
+
+                                            <th scope="col" class="text-start py-3 px-5">
                                                 &nbsp;
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template x-for="item in data" x-show="!isLoading">
+                                        <template x-for="item in result.data" x-show="!isLoading">
                                             <tr class="border-gray-300 text-start">
-                                                <td class="border-b py-4 px-6" x-text='item.name'></td>
-                                                <td class=" whitespace-nowrap border-b py-4 px-6 text-end">
+                                                <td class="border-b py-3 px-5" x-text='item.name'></td>
+                                                <td class=" whitespace-nowrap border-b py-3 px-5 text-end">
                                                     <x-ui.button-icon style="secondary">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                                             <path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
                                                             <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
-                                                          </svg>
-                                                    </x-ui.button-icon>
-                                                    <x-ui.button-icon style="danger">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                            <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z" clip-rule="evenodd" />
                                                           </svg>
                                                     </x-ui.button-icon>
                                                 </td>
@@ -78,10 +74,16 @@
                                     </tbody>
                                 </table>
                         </div>
-
+                        <div class="p-6 flex justify-end">
+                            <nav class="isolate -space-x-px rounded-md shadow-sm">
+                                <template x-for="(link, index) in result.links">
+                                    <x-ui.pagination-link x-on:click="loadPage(link.url)" x-text="setPaginationLabel(link.label, index)" index="index" ::class="{ 'bg-gray-900 text-white' : link.active, 'text-gray-900 hover:bg-gray-100' : !link.active, 'rounded-l-md' : index == 0, 'rounded-r-md' : index == result.data.length - 1  }" ></x-ui.pagination-link>
+                                </template>
+                            </nav>
+                          </div>
                     </x-slot>
                 </x-ui.card>
-                <x-ui.table-card x-data="userIndex" x-init="loadUsers()">
+                <x-ui.table-card x-data="brandsIndex" x-init="loadEverything()">
                     <x-slot name="title">
                         {{ __('Brands') }}
                     </x-slot>
@@ -93,8 +95,8 @@
                     <x-slot name="buttons">
                         <div class="space-x-3 flex items-center h-5">
                             <div class="w-full inline-flex items-center bg-white disabled:bg-gray-200 border border-gray-300 rounded-md text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
-                                <input x-model="filter.search" x-on:keyup.enter="reloadUsers()" class="text-sm border-0 px-5 rounded-lg focus:ring-0" type="text" name="search" placeholder="Search">
-                                <button x-on:click="reloadUsers()" type="button" class="px-3 py-2">
+                                <input x-model="filter.search" x-on:keyup.enter="loadBrands()" class="text-sm border-0 px-5 rounded-lg focus:ring-0" type="text" name="search" placeholder="Search">
+                                <button x-on:click="loadBrands()" type="button" class="px-3 py-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                         <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
                                       </svg>
@@ -114,29 +116,24 @@
                             <table id="table" class="min-w-full">
                                     <thead class="font-medium">
                                         <tr class="border-b-2 border-gray-300">
-                                            <th scope="col" class="text-start py-4 px-6">
+                                            <th scope="col" class="text-start py-3 px-5">
                                                 Name
                                             </th>
 
-                                            <th scope="col" class="text-start py-4 px-6">
+                                            <th scope="col" class="text-start py-3 px-5">
                                                 &nbsp;
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <template x-for="item in data" x-show="!isLoading">
+                                        <template x-for="item in result.data" x-show="!isLoading">
                                             <tr class="border-gray-300 text-start">
-                                                <td class="border-b py-4 px-6" x-text='item.name'></td>
-                                                <td class=" whitespace-nowrap border-b py-4 px-6 text-end">
+                                                <td class="border-b py-3 px-5" x-text='item.name'></td>
+                                                <td class=" whitespace-nowrap border-b py-3 px-5 text-end">
                                                     <x-ui.button-icon style="secondary">
                                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                                             <path d="M5.433 13.917l1.262-3.155A4 4 0 017.58 9.42l6.92-6.918a2.121 2.121 0 013 3l-6.92 6.918c-.383.383-.84.685-1.343.886l-3.154 1.262a.5.5 0 01-.65-.65z" />
                                                             <path d="M3.5 5.75c0-.69.56-1.25 1.25-1.25H10A.75.75 0 0010 3H4.75A2.75 2.75 0 002 5.75v9.5A2.75 2.75 0 004.75 18h9.5A2.75 2.75 0 0017 15.25V10a.75.75 0 00-1.5 0v5.25c0 .69-.56 1.25-1.25 1.25h-9.5c-.69 0-1.25-.56-1.25-1.25v-9.5z" />
-                                                          </svg>
-                                                    </x-ui.button-icon>
-                                                    <x-ui.button-icon style="danger">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
-                                                            <path fill-rule="evenodd" d="M8.75 1A2.75 2.75 0 006 3.75v.443c-.795.077-1.584.176-2.365.298a.75.75 0 10.23 1.482l.149-.022.841 10.518A2.75 2.75 0 007.596 19h4.807a2.75 2.75 0 002.742-2.53l.841-10.52.149.023a.75.75 0 00.23-1.482A41.03 41.03 0 0014 4.193V3.75A2.75 2.75 0 0011.25 1h-2.5zM10 4c.84 0 1.673.025 2.5.075V3.75c0-.69-.56-1.25-1.25-1.25h-2.5c-.69 0-1.25.56-1.25 1.25v.325C8.327 4.025 9.16 4 10 4zM8.58 7.72a.75.75 0 00-1.5.06l.3 7.5a.75.75 0 101.5-.06l-.3-7.5zm4.34.06a.75.75 0 10-1.5-.06l-.3 7.5a.75.75 0 101.5.06l.3-7.5z" clip-rule="evenodd" />
                                                           </svg>
                                                     </x-ui.button-icon>
                                                 </td>
@@ -145,7 +142,13 @@
                                     </tbody>
                                 </table>
                         </div>
-
+                        <div class="p-6 flex justify-end">
+                            <nav class="isolate -space-x-px rounded-md shadow-sm">
+                                <template x-for="(link, index) in result.links">
+                                    <x-ui.pagination-link x-on:click="loadPage(link.url)" x-text="setPaginationLabel(link.label, index)" index="index" ::class="{ 'bg-gray-900 text-white' : link.active, 'text-gray-900 hover:bg-gray-100' : !link.active, 'rounded-l-md' : index == 0, 'rounded-r-md' : index == result.data.length - 1 }" ></x-ui.pagination-link>
+                                </template>
+                            </nav>
+                          </div>
                     </x-slot>
                 </x-ui.card>
             </div>

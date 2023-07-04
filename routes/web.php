@@ -3,6 +3,7 @@
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ItemSettingsController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
@@ -43,11 +44,14 @@ Route::middleware('auth')->group(function () {
      * Item Settings
      */
      Route::get('/items/settings', [ItemSettingsController::class, 'index'])->name('items.settings.index');
+     Route::get('/items/settings/brands/fetch', [ItemSettingsController::class, 'fetchBrands'])->name('items.settings.brands.fetch');
+     Route::get('/items/settings/types/fetch', [ItemSettingsController::class, 'fetchTypes'])->name('items.settings.types.fetch');
 
      /**
       * Items
       */
-     Route::get('/items/item', [UsersController::class, 'index'])->name('admin.users.index');
+     Route::get('/items', [ItemsController::class, 'index'])->name('items.index');
+     Route::get('/items/fetch', [ItemsController::class, 'fetchItems'])->name('items.fetch');
 
 
 });
