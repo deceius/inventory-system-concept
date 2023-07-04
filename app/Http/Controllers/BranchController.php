@@ -42,7 +42,7 @@ class BranchController extends Controller
         if ($inactive) {
             $branches->where('is_active', $inactive);
         }
-        return response(['branches' => $branches->get()]);
+        return response(['result' => $branches->paginate(9)]);
     }
 
 

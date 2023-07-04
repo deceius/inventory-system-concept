@@ -18,18 +18,19 @@ class ItemsController extends Controller
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
         $items = Item::orderBy('is_active', 'desc')
                     ->orderBy('id', 'asc');
+        $items->with('brand');
+        $items->with('type');
         if ($search) {
             $items->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
+                $query->orWhereHas('brand', function($query) use ($search) {
+                    $query->where('name', 'LIKE', '%' . $search . '%');
+                });
             });
         }
         if ($inactive) {
             $items->where('is_active', $inactive);
         }
-
-        $items->with('brand');
-        $items->with('type');
-        $items->simplePaginate(15);
         return response(['result' => $items->paginate(10)]);
     }
 }

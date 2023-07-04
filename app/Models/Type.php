@@ -18,4 +18,12 @@ class Type extends Model
         'created_at',
         'updated_at',
     ];
+
+    protected $appends = [
+        'url'
+    ];
+
+    public function getUrlAttribute() {
+        return url('items/settings/type/'.$this->getKey());
+    }
 }

@@ -29,7 +29,6 @@ class ItemSettingsController extends Controller
         if ($inactive) {
             $brands->where('is_active', $inactive);
         }
-        $brands->simplePaginate(15);
         return response(['result' => $brands->paginate(10)]);
     }
 
@@ -46,7 +45,6 @@ class ItemSettingsController extends Controller
         if ($inactive) {
             $brands->where('is_active', $inactive);
         }
-        $brands->simplePaginate(15);
         return response(['result' => $brands->paginate(10)]);
     }
 

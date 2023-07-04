@@ -59,7 +59,7 @@ class UsersController extends Controller
 
         $users->with('branch');
 
-        return response(['users' => $users->get()]);
+        return response(['result' => $users->paginate(9)]);
     }
 
     public function store(UserStoreRequest $request): RedirectResponse

@@ -36,18 +36,11 @@
         </x-ui.toolbar>
         <div class="py-6">
             <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
-                <template x-if="!isLoading && !data.length">
+                <template x-if="!isLoading && !result.data.length">
                     <x-ui.no-data data="{{ __('Branch')}}"></x-ui.no-data>
                 </template>
-                <template x-if="isLoading">
-                    <div class="grid md:grid-cols-3 gap-4 grid-cols-1">
-                        @for ($i = 0; $i < $count; $i++)
-                            <x-ui.branch-loading></x-ui.branch-loading>
-                        @endfor
-                    </div>
-                </template>
                 <div class="grid md:grid-cols-3 gap-4 grid-cols-1">
-                    <template x-for="item in data">
+                    <template x-for="item in result.data">
                         <x-ui.card ::class="{ 'opacity-50' : !item.is_active }">
                             <x-slot name="title">
                                 <span x-text="item.name"></span>
@@ -102,7 +95,13 @@
                             </x-slot>
                         </x-ui.card>
                     </template>
-
+            </div>
+            <div class="w-full flex justify-end mt-6" x-show="result.last_page > 1">
+                <nav class="isolate -space-x-px rounded-md shadow-sm">
+                    <template x-for="(link, index) in result.links">
+                        <x-ui.pagination-link x-on:click="loadPage(link.url)" x-text="setPaginationLabel(link.label, index)" index="index" ::class="{ 'bg-white' : !link.active, 'bg-gray-900 text-white' : link.active, 'text-gray-900 hover:bg-gray-100' : !link.active, 'rounded-l-md' : index == 0, 'rounded-r-md' : index == result.data.length - 1 }" ></x-ui.pagination-link>
+                    </template>
+                </nav>
             </div>
         </div>
     </div>
