@@ -2,12 +2,78 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UserStoreRequest;
+use App\Http\Requests\User\UserUpdateRequest;
+use App\Models\Branch;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class UsersController extends Controller
 {
+
+
+    protected $tiers = ['Admin', 'Manager', 'Employee', 'Read-only'];
+    // Views
+
     public function index(): View {
-        return view('users.index');
+        $count = User::count();
+        return view('users.index', ['count' => $count]);
     }
+
+    public function create(): View {
+        $branches = Branch::where('is_active', 1)->get();
+        return view('users.create', ['branches' => $branches]);
+    }
+
+    public function edit(Request $request, User $user): View {
+        $branches = Branch::where('is_active', 1)->get();
+        return view('users.edit', ['user' => $user, 'branches' => $branches, 'tiers' => $this->tiers]);
+    }
+
+
+    // API Calls
+
+    public function fetch(Request $request): Response {
+        $search = $request->input('search');
+        $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
+        $users = User::orderBy('is_active', 'desc')
+                    ->orderBy('id', 'asc');
+        if ($search) {
+            $users->where(function ($query) use ($search) {
+                $query->where('name', 'LIKE', '%' . $search . '%');
+                $query->orWhere('email', 'LIKE', '%' . $search . '%');
+            });
+        }
+        if ($inactive) {
+            $users->where('is_active', $inactive);
+        }
+
+        $users->with('branch');
+
+        return response(['users' => $users->get()]);
+    }
+
+    public function store(UserStoreRequest $request): RedirectResponse
+    {
+        $sanitized = $request->getSanitized();
+        User::create($sanitized);
+        return Redirect::route('admin.users.index')->with('status', 'user-created');
+    }
+
+
+
+    public function update(UserUpdateRequest $request, User $user): RedirectResponse
+    {
+        $user->fill($request->validated());
+        $user->save();
+        return Redirect::route('admin.users.edit', ['user' => $user])->with('status', 'user-updated');
+    }
+
+
 }

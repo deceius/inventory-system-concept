@@ -15,12 +15,16 @@ use Illuminate\View\View;
 class BranchController extends Controller
 {
     public function index(): View {
-        $branches = Branch::all();
-        return view('branch.index', ['count' => $branches->count()]);
+        $count = Branch::count();
+        return view('branch.index', ['count' => $count]);
     }
 
     public function create(): View {
         return view('branch.create');
+    }
+
+    public function edit(Request $request, Branch $branch): View {
+        return view('branch.edit', ['branch' => $branch]);
     }
 
     public function fetch(Request $request): Response {
@@ -41,9 +45,6 @@ class BranchController extends Controller
         return response(['branches' => $branches->get()]);
     }
 
-    public function edit(Request $request, Branch $branch): View {
-        return view('branch.edit', ['branch' => $branch]);
-    }
 
     public function update(BranchUpdateRequest $request, Branch $branch): RedirectResponse
     {
@@ -76,9 +77,7 @@ class BranchController extends Controller
     {
         $sanitized = $request->getSanitized();
         $sanitized['created_by'] = Auth::user()->id;
-
-        // Store the Branch
-        $branch = Branch::create($sanitized);
+        Branch::create($sanitized);
 
         return Redirect::route('admin.branch.index')->with('status', 'branch-created');
     }

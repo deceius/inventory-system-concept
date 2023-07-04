@@ -29,22 +29,22 @@
                 <x-slot name="content">
                     <form method="post" action="{{ route('admin.branch.store') }}">
                         @csrf
-                        <div class="mb-6">
+                        <div>
                             <x-ui.input.label for="name" :value="__('Branch Name')" />
                             <x-ui.input.text id="name" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
                             <x-ui.input.error class="mt-2" :messages="$errors->get('name')" />
                         </div>
-                        <div class="mb-6">
+                        <div class="mt-4">
                             <x-ui.input.label for="tin" :value="__('TIN')" />
                             <x-ui.input.text id="tin" name="tin" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
                             <x-ui.input.error class="mt-2" :messages="$errors->get('tin')" />
                         </div>
-                        <div class="mb-6">
+                        <div class="mt-4">
                             <x-ui.input.label for="address" :value="__('Address')" />
                             <x-ui.input.text id="address" name="address" type="text" class="mt-1 block w-full" required autofocus autocomplete="address" />
                             <x-ui.input.error class="mt-2" :messages="$errors->get('address')" />
                         </div>
-                        <div class="flex items-center gap-4">
+                        <div class="flex items-center gap-4 mt-4">
                             <x-ui.button type="submit" text="{{ __('Save') }}"></x-ui.button>
                         </div>
                     </form>

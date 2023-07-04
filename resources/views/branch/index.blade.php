@@ -18,10 +18,10 @@
         </x-ui.page-header>
     </x-slot>
     <div x-data="branchIndex" x-init="loadBranches()">
-        <x-ui.toolbar>
+        <x-ui.toolbar >
             <div class="space-x-3 flex items-center h-5">
-                <div class="inline-flex items-center bg-white disabled:bg-gray-200 border border-gray-300 rounded-md font-semibold text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
-                    <input x-model="filter.search" x-on:keyup.enter="reloadBranches()" class="border-0 px-5 rounded-lg text-sm focus:ring-0" type="text" name="search" placeholder="Search">
+                <div class="inline-flex items-center bg-white disabled:bg-gray-200 border border-gray-300 rounded-md text-xs text-gray-700 uppercase tracking-widest shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-25 transition ease-in-out duration-150">
+                    <input x-model="filter.search" x-on:keyup.enter="reloadBranches()" class="border-0 px-5 rounded-lg focus:ring-0" type="text" name="search" placeholder="Search">
                     <button x-on:click="reloadBranches()" type="button" class="px-3 py-2">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                             <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clip-rule="evenodd" />
@@ -29,12 +29,10 @@
                     </button>
                   </div>
             </div>
-            <div>
-                <label for="remember_me" class="inline-flex items-center">
-                    <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" x-model="filter.inactive">
-                    <span class="ml-2 text-sm text-gray-600">{{ __('Hide Inactive Branches') }}</span>
-                </label>
-            </div>
+            <label for="remember_me" class="inline-flex items-center">
+                <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" x-model="filter.inactive">
+                <span class="ml-2 text-sm text-gray-600">{{ __('Hide Inactive Branches') }}</span>
+            </label>
         </x-ui.toolbar>
         <div class="py-12">
             <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
@@ -42,12 +40,13 @@
                     <x-ui.no-data data="{{ __('Branch')}}"></x-ui.no-data>
                 </template>
                 <template x-if="isLoading">
-                    <div>
+                    <div class="grid md:grid-cols-3 gap-4 grid-cols-1">
                         @for ($i = 0; $i < $count; $i++)
                             <x-ui.branch-loading></x-ui.branch-loading>
                         @endfor
                     </div>
                 </template>
+                <div class="grid md:grid-cols-3 gap-4 grid-cols-1">
                     <template x-for="item in data">
                         <x-ui.card ::class="{ 'opacity-50' : !item.is_active }">
                             <x-slot name="title">

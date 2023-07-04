@@ -31,9 +31,18 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
-    Route::get('/admin/users', [UsersController::class, 'index'])->name('admin.users.index');
-    Route::get('/admin/branch', [BranchController::class, 'index'])->name('admin.branch.index');
 
+    Route::get('/admin/users', [UsersController::class, 'index'])->name('admin.users.index');
+    Route::get('/admin/users/fetch', [UsersController::class, 'fetch'])->name('admin.users.fetch');
+    Route::get('/admin/users/create', [UsersController::class, 'create'])->name('admin.users.create');
+    Route::post('/admin/users/store', [UsersController::class, 'store'])->name('admin.users.store');
+    Route::get('/admin/users/{user}/edit', [UsersController::class, 'edit'])->name('admin.users.edit');
+    Route::patch('/admin/users/{user}/update', [UsersController::class, 'update'])->name('admin.users.update');
+    Route::patch('/admin/users/{user}/activate', [UsersController::class, 'activate'])->name('admin.users.activate');
+    Route::patch('/admin/users/{user}/deactivate', [UsersController::class, 'deactivate'])->name('admin.users.deactivate');
+
+
+    Route::get('/admin/branch', [BranchController::class, 'index'])->name('admin.branch.index');
     Route::get('/admin/branch/create', [BranchController::class, 'create'])->name('admin.branch.create');
     Route::get('/admin/branch/{branch}/edit', [BranchController::class, 'edit'])->name('admin.branch.edit');
     Route::patch('/admin/branch/{branch}/update', [BranchController::class, 'update'])->name('admin.branch.update');

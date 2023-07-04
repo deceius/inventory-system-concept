@@ -1,6 +1,6 @@
 
 @props(['title'])
-<div {{ $attributes->merge(['class' => 'mb-6 bg-white overflow-hidden shadow-sm sm:rounded-lg']) }}>
+<div {{ $attributes->merge(['class' => 'bg-white overflow-hidden shadow-sm sm:rounded-lg']) }}>
     @isset($title)
     <div  {{ $title->attributes->merge(['class' => 'p-6 text-gray-900']) }}>
         <div class="flex justify-between h-5 items-center">

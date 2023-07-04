@@ -10,6 +10,7 @@
     </x-slot>
     <x-slot name="content">
         <div class="animate-pulse h-5 bg-slate-300 rounded mb-3"></div>
+            <div class="animate-pulse h-5 bg-slate-300 rounded mb-3"></div>
             <div class="animate-pulse h-5 bg-slate-300 rounded"></div>
     </x-slot>
 </x-ui.card>
