@@ -31,7 +31,7 @@
             </div>
             <label for="remember_me" class="inline-flex items-center">
                 <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" x-model="filter.inactive">
-                <span class="ml-2 text-sm text-gray-600">{{ __('Hide Inactive Branches') }}</span>
+                <span class="ml-2 text-sm text-gray-600">{{ __('Show Inactive Branches') }}</span>
             </label>
         </x-ui.toolbar>
         <div class="py-6">

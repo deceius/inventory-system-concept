@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 class ItemsController extends Controller
 {
     public function index(): View {
-        return view('items.index', ['count' => 0]);
+        return view('items.index');
     }
 
     public function fetchItems(Request $request): Response {

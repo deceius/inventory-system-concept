@@ -20,9 +20,8 @@ class UsersController extends Controller
     // Views
 
     public function index(): View {
-        $count = User::count();
         $branches = Branch::where('is_active', 1)->get();
-        return view('users.index', ['count' => $count, 'branches' => $branches]);
+        return view('users.index', ['branches' => $branches]);
     }
 
     public function create(): View {
@@ -53,8 +52,8 @@ class UsersController extends Controller
         if ($branch){
             $users->where('branch_id', $branch);
         }
-        if ($inactive) {
-            $users->where('is_active', $inactive);
+        if (!$inactive) {
+            $users->where('is_active', !$inactive);
         }
 
         $users->with('branch');

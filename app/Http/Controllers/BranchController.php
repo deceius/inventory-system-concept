@@ -15,8 +15,7 @@ use Illuminate\View\View;
 class BranchController extends Controller
 {
     public function index(): View {
-        $count = Branch::count();
-        return view('branch.index', ['count' => $count]);
+        return view('branch.index');
     }
 
     public function create(): View {
@@ -39,8 +38,8 @@ class BranchController extends Controller
                 $query->orWhere('tin', 'LIKE', '%' . $search . '%');
             });
         }
-        if ($inactive) {
-            $branches->where('is_active', $inactive);
+        if (!$inactive) {
+            $branches->where('is_active', !$inactive);
         }
         return response(['result' => $branches->paginate(9)]);
     }

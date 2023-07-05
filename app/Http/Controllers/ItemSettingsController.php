@@ -13,7 +13,7 @@ class ItemSettingsController extends Controller
 {
 
     public function index(): View {
-        return view('item-settings.index', ['count' => 0]);
+        return view('item-settings.index');
     }
 
     public function fetchBrands(Request $request): Response {
