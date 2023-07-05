@@ -83,7 +83,7 @@
                         </div>
                         <div class="p-6 flex justify-end">
                             <x-ui.pagination links="result.links"/>
-                          </div>
+                        </div>
                     </x-slot>
                 </x-ui.card>
             </div>
