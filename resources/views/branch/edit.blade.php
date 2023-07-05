@@ -6,7 +6,21 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
                   </svg>
             </x-slot>
-
+            <x-slot:buttons>
+                @if (old('isActive', $branch->is_active))
+                    <form method="post" action="{{ $branch->url . '/deactivate' }}">
+                        @csrf
+                        @method('PATCH')
+                        <x-ui.button type="submit" style="danger" text="{{ __('Deactivate') }}">
+                    </x-ui.button>
+                @else
+                    <form method="post" action="{{ $branch->url . '/activate' }}">
+                        @csrf
+                        @method('PATCH')
+                        <x-ui.button type="submit" style="success" text="{{ __('Activate') }}"></x-ui.button>
+                    </form>
+                @endif
+            </x-slot:buttons>
             <x-slot name="prevLevel">
                 <a class="text-indigo-400 font-light underline" href="{{ route('admin.branch.index') }}">Branch Master Data</a>
                 <x-icons.breadcrumb></x-icons.breadcrumb>
@@ -90,15 +104,7 @@
                     </x-slot>
                 </x-ui.card>
             @endif
-            <x-ui.card>
-                <x-slot name="content">
-                    @if (old('isActive', $branch->is_active))
-                        @include('branch.deactivate')
-                    @else
-                        @include('branch.activate')
-                    @endif
-                </x-slot>
-            </x-ui.card>
+
         </div>
     </div>
 </x-app-layout>

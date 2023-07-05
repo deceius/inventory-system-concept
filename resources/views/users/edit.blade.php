@@ -6,7 +6,21 @@
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
                   </svg>
             </x-slot>
-
+            <x-slot:buttons>
+                @if (old('isActive', $user->is_active))
+                    <form method="post" action="{{ $user->url . '/deactivate' }}">
+                        @csrf
+                        @method('PATCH')
+                        <x-ui.button type="submit" style="danger" text="{{ __('Deactivate') }}">
+                    </x-ui.button>
+                @else
+                    <form method="post" action="{{ $user->url . '/activate' }}">
+                        @csrf
+                        @method('PATCH')
+                        <x-ui.button type="submit" style="success" text="{{ __('Activate') }}"></x-ui.button>
+                    </form>
+                @endif
+            </x-slot:buttons>
             <x-slot name="prevLevel">
                 <a class="text-indigo-400 font-light underline" href="{{ route('admin.users.index') }}">User Management</a>
                 <x-icons.breadcrumb></x-icons.breadcrumb>
@@ -32,7 +46,7 @@
                         <!-- Name -->
                         <div>
                             <x-ui.input.label for="name" :value="__('Name')" />
-                            <x-ui.input.text id="name" :value="old('name', $user->name)" class="block mt-1 w-full" type="text" name="name"  required autofocus />
+                            <x-ui.input.text id="name" :disabled="!$user->is_active" :value="old('name', $user->name)" class="block mt-1 w-full" type="text" name="name"  required autofocus />
                             <x-ui.input.error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
@@ -48,6 +62,7 @@
                             <x-ui.select id="branch_id"
                                         class="block mt-1 w-full"
                                         name="branch_id"
+                                        :disabled="!$user->is_active"
                                         :value="old('branch_id', $user->branch_id)"
                                         required>
                                 @foreach ($branches as $branch)
@@ -63,6 +78,7 @@
                                         class="block mt-1 w-full"
                                         name="access_tier"
                                         :value="old('access_tier', $user->access_tier)"
+                                         :disabled="!$user->is_active"
                                         required>
                                 @foreach ($tiers as $key => $value)
                                     <option value="{{$key + 1}}" {{ $key + 1 == old('access_tier', $user->access_tier) ? 'selected' : ''}}>{{ $value }}</option>
@@ -71,7 +87,7 @@
                             <x-ui.input.error :messages="$errors->get('access_tier')" class="mt-2" />
                         </div>
                         <div class="flex items-center gap-4 mt-4">
-                            <x-ui.button type="submit" text="{{ __('Update User') }}">
+                            <x-ui.button type="submit" text="{{ __('Update User') }}" :disabled="!$user->is_active">
                             </x-ui.button>
                             @if (session('status') === 'user-updated')
                                 <p
@@ -84,15 +100,6 @@
                             @endif
                         </div>
                     </form>
-                </x-slot>
-            </x-ui.card>
-            <x-ui.card>
-                <x-slot name="content">
-                    @if (old('isActive', $user->is_active))
-                        @include('users.deactivate')
-                    @else
-                        @include('users.activate')
-                    @endif
                 </x-slot>
             </x-ui.card>
         </div>
