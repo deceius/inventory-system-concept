@@ -10,9 +10,9 @@
 
             <x-slot:prev-level>
                 <span>Master Data</span>
-                <x-icons.breadcrumb></x-icons.breadcrumb>
+                <x-icons.breadcrumb/>
                 <a class="text-indigo-400 font-light underline" href="{{ route('items.settings.index') }}">Item Settings</a>
-                <x-icons.breadcrumb></x-icons.breadcrumb>
+                <x-icons.breadcrumb/>
             </x-slot>
         </x-ui.header>
     </x-slot>
@@ -25,7 +25,6 @@
                 <x-slot:content>
                     <form method="POST" action="{{ route('items.settings.brands.store') }}">
                         @csrf
-
                         <!-- Name -->
                         <div>
                             <x-ui.form.input.label for="name" :value="__('Name')" />

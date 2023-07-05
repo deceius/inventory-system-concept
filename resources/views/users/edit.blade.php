@@ -15,7 +15,7 @@
             </x-slot>
             <x-slot:prev-level>
                 <a class="text-indigo-400 font-light underline" href="{{ route('admin.users.index') }}">User Management</a>
-                <x-icons.breadcrumb></x-icons.breadcrumb>
+                <x-icons.breadcrumb/>
             </x-slot>
         </x-ui.header>
     </x-slot>
