@@ -59,7 +59,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <x-ui.input.label for="access_tier" :value="__('Access Tier')" />
+                            <x-ui.input.label for="access_tier" :value="__('Access Level')" />
                             <x-ui.select id="access_tier"
                                         class="block mt-1 w-full"
                                         name="access_tier"
