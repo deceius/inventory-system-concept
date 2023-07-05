@@ -19,8 +19,8 @@
                         {{ __('Inventory') }}
                     </x-ui.nav.link>
                     <x-ui.nav.dropdown>
-                        <x-slot name="title">{{ __('Transactions') }}</x-slot>
-                        <x-slot name="content">
+                        <x-slot:title>{{ __('Transactions') }}</x-slot>
+                        <x-slot:content>
                             <x-ui.dropdown.item :href="route('profile.edit')">
                                 {{ __('Sales') }}
                             </x-ui.dropdown.item>
@@ -35,8 +35,8 @@
                         </x-slot>
                     </x-ui.nav.dropdown>
                     <x-ui.nav.dropdown>
-                        <x-slot name="title">{{ __('Branch Management') }}</x-slot>
-                        <x-slot name="content">
+                        <x-slot:title>{{ __('Branch Management') }}</x-slot>
+                        <x-slot:content>
                             <x-ui.dropdown.item :href="route('profile.edit')">
                                 {{ __('Customers') }}
                             </x-ui.dropdown.item>
@@ -54,8 +54,8 @@
                         </x-slot>
                     </x-ui.nav.dropdown>
                     <x-ui.nav.dropdown>
-                        <x-slot name="title">{{ __('Reports') }}</x-slot>
-                        <x-slot name="content">
+                        <x-slot:title>{{ __('Reports') }}</x-slot>
+                        <x-slot:content>
                             <x-ui.dropdown.item :href="route('profile.edit')">
                                 {{ __('Item Sales') }}
                             </x-ui.dropdown.item>
@@ -66,8 +66,8 @@
                         </x-slot>
                     </x-ui.nav.dropdown>
                     <x-ui.nav.dropdown :active="request()->routeIs('items.*')">
-                        <x-slot name="title">{{ __('Master Data') }}</x-slot>
-                        <x-slot name="content">
+                        <x-slot:title>{{ __('Master Data') }}</x-slot>
+                        <x-slot:content>
                             <x-ui.dropdown.item :href="route('items.index')" :active="request()->routeIs('items.index')">
                                 {{ __('Items') }}
                             </x-ui.dropdown.item>
@@ -78,8 +78,8 @@
                         </x-slot>
                     </x-ui.nav.dropdown>
                     <x-ui.nav.dropdown :active="request()->routeIs('admin.*')">
-                        <x-slot name="title">{{ __('Admin Settings') }}</x-slot>
-                        <x-slot name="content">
+                        <x-slot:title>{{ __('Admin Settings') }}</x-slot>
+                        <x-slot:content>
                             <x-ui.dropdown.item :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
                                 {{ __('User Management') }}
                             </x-ui.dropdown.item>
@@ -105,7 +105,7 @@
                             </div>
                         </button>
                     </x-slot>
-                    <x-slot name="content">
+                    <x-slot:content>
                         <x-ui.dropdown.item :href="route('profile.edit')">
                             {{ __('Update Password') }}
                         </x-ui.dropdown.item>

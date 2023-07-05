@@ -11,9 +11,9 @@
 
         <!-- Email Address -->
         <div>
-            <x-ui.input.label for="email" :value="__('Email')" />
-            <x-ui.input.text id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            <x-ui.input.error :messages="$errors->get('email')" class="mt-2" />
+            <x-ui.form.input.label for="email" :value="__('Email')" />
+            <x-ui.form.input.text id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            <x-ui.form.input.error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">

@@ -18,15 +18,15 @@
         @method('patch')
 
         <div>
-            <x-ui.input.label for="name" :value="__('Name')" />
-            <x-ui.input.text id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-ui.input.error class="mt-2" :messages="$errors->get('name')" />
+            <x-ui.form.input.label for="name" :value="__('Name')" />
+            <x-ui.form.input.text id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-ui.form.input.error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-ui.input.label for="email" :value="__('Email')" />
-            <x-ui.input.text id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
-            <x-ui.input.error class="mt-2" :messages="$errors->get('email')" />
+            <x-ui.form.input.label for="email" :value="__('Email')" />
+            <x-ui.form.input.text id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
+            <x-ui.form.input.error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>

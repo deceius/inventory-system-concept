@@ -1,13 +1,13 @@
 <x-app-layout>
-    <x-slot name="header">
+    <x-slot:header>
         <x-ui.header title="{{ __('Edit Brand') }}">
-            <x-slot name="icon">
+            <x-slot:icon>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
                   </svg>
 
             </x-slot>
-            <x-slot name="buttons">
+            <x-slot:buttons>
                 @if (old('isActive', $brand->is_active))
                                 <form method="post" action="{{ $brand->url . '/deactivate' }}">
                                     @csrf
@@ -23,7 +23,7 @@
                             </form>
                     @endif
             </x-slot>
-            <x-slot name="prevLevel">
+            <x-slot:prev-level>
                 <span>Master Data</span>
                 <x-icons.breadcrumb></x-icons.breadcrumb>
                 <a class="text-indigo-400 font-light underline" href="{{ route('items.settings.index') }}">Item Settings</a>
@@ -36,14 +36,14 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <x-ui.card>
 
-                <x-slot name="content">
+                <x-slot:content>
                     <form method="post" action="{{ $brand->url . '/update' }}">
                         @csrf
                         @method('PATCH')
                         <div>
-                            <x-ui.input.label for="name" :value="__('Name')" />
-                            <x-ui.input.text id="name" :disabled="!$brand->is_active"  :value="old('name', $brand->name)" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
-                            <x-ui.input.error class="mt-2" :messages="$errors->get('name')" />
+                            <x-ui.form.input.label for="name" :value="__('Name')" />
+                            <x-ui.form.input.text id="name" :disabled="!$brand->is_active"  :value="old('name', $brand->name)" name="name" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
+                            <x-ui.form.input.error class="mt-2" :messages="$errors->get('name')" />
                         </div>
 
                         <div class="flex items-center gap-2 mt-4">

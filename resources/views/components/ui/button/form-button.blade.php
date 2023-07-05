@@ -6,6 +6,6 @@
     <x-ui.button type="submit" style="{{ $style }}" text="{{ $text }}">
         <x-slot:icon>
             {{ $slot }}
-        </x-slot:icon>
+        </x-slot>
     </x-ui.button>
 </form>

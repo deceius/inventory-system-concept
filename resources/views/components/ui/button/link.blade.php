@@ -18,8 +18,10 @@ switch ($style) {
 
 @endphp
 <a {{ $attributes->merge(['class' => $classes]) }}>
-    <div class="flex space-x-2 items-center h-5">
+    <div class="flex gap-2 items-center h-5">
         {{ $icon ?? '' }}
-        <span>{{ $text }}</span>
+        @if($text)
+            <span>{{ $text ?? '' }}</span>
+        @endif
    </div>
 </a>

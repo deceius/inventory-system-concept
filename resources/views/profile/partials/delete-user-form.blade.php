@@ -28,9 +28,9 @@
             </p>
 
             <div class="mt-6">
-                <x-ui.input.label for="password" value="{{ __('Password') }}" class="sr-only" />
+                <x-ui.form.input.label for="password" value="{{ __('Password') }}" class="sr-only" />
 
-                <x-ui.input.text
+                <x-ui.form.input.text
                     id="password"
                     name="password"
                     type="password"
@@ -38,7 +38,7 @@
                     placeholder="{{ __('Password') }}"
                 />
 
-                <x-ui.input.error :messages="$errors->userDeletion->get('password')" class="mt-2" />
+                <x-ui.form.input.error :messages="$errors->userDeletion->get('password')" class="mt-2" />
             </div>
 
             <div class="mt-6 flex justify-end">

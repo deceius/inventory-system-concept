@@ -14,21 +14,21 @@
         @method('put')
 
         <div>
-            <x-ui.input.label for="current_password" :value="__('Current Password')" />
-            <x-ui.input.text id="current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
-            <x-ui.input.error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
+            <x-ui.form.input.label for="current_password" :value="__('Current Password')" />
+            <x-ui.form.input.text id="current_password" name="current_password" type="password" class="mt-1 block w-full" autocomplete="current-password" />
+            <x-ui.form.input.error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
         </div>
 
         <div>
-            <x-ui.input.label for="password" :value="__('New Password')" />
-            <x-ui.input.text id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-ui.input.error :messages="$errors->updatePassword->get('password')" class="mt-2" />
+            <x-ui.form.input.label for="password" :value="__('New Password')" />
+            <x-ui.form.input.text id="password" name="password" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+            <x-ui.form.input.error :messages="$errors->updatePassword->get('password')" class="mt-2" />
         </div>
 
         <div>
-            <x-ui.input.label for="password_confirmation" :value="__('Confirm Password')" />
-            <x-ui.input.text id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
-            <x-ui.input.error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
+            <x-ui.form.input.label for="password_confirmation" :value="__('Confirm Password')" />
+            <x-ui.form.input.text id="password_confirmation" name="password_confirmation" type="password" class="mt-1 block w-full" autocomplete="new-password" />
+            <x-ui.form.input.error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
         </div>
 
         <div class="flex items-center gap-4">

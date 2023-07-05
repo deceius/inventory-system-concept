@@ -21,7 +21,7 @@ switch ($style) {
     <div class="flex gap-2 items-center h-5">
         {{ $icon ?? '' }}
         @if($text)
-        <span>{{ $text ?? '' }}</span>
+            <span>{{ $text ?? '' }}</span>
         @endif
    </div>
 </button>
