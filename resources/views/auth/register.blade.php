@@ -31,15 +31,15 @@
         </div>
 
         <div class="mt-4">
-            <x-ui.input.label for="access_tier" :value="__('Access Tier')" />
+            <x-ui.input.label for="access_tier" :value="__('Access Level')" />
             <x-ui.select id="access_tier"
                         class="block mt-1 w-full"
                         name="access_tier"
                         required>
-                <option>Admin (1)</option>
-                <option>Manager (2)</option>
-                <option>Employee (3)</option>
-                <option>Readonly (4)</option>
+                <option>Admin</option>
+                <option>Manager</option>
+                <option>Employee</option>
+                <option>Readonly</option>
             </x-ui.select>
             <x-ui.input.error :messages="$errors->get('access_tier')" class="mt-2" />
         </div>
