@@ -17,7 +17,7 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
-            <x-ui.button text="{{ __('Email Password Reset Link') }}"></x-ui.button>
+            <x-ui.button text="{{ __('Email Password Reset Link') }}"/>
         </div>
     </form>
 </x-guest-layout>

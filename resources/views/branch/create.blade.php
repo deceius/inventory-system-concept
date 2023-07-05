@@ -45,7 +45,7 @@
                             <x-ui.form.input.error class="mt-2" :messages="$errors->get('address')" />
                         </div>
                         <div class="flex items-center gap-4 mt-4">
-                            <x-ui.button type="submit" text="{{ __('Save') }}"></x-ui.button>
+                            <x-ui.button type="submit" text="{{ __('Save') }}"/>
                         </div>
                     </form>
                 </x-slot>

@@ -19,7 +19,7 @@
         </div>
 
         <div class="flex justify-end mt-4">
-            <x-ui.button text="{{ __('Confirm') }}"></x-ui.button>
+            <x-ui.button text="{{ __('Confirm') }}"/>
         </div>
     </form>
 </x-guest-layout>

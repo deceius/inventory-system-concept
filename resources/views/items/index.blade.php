@@ -13,7 +13,7 @@
             <x-slot:buttons>
                 <x-ui.button.link href="{{ route('admin.users.create') }}" style="success" text="{{ __('Create Item') }}">
                     <x-slot:icon>
-                        <x-ui.icons.create/>
+                        <x-icons.create/>
                     </x-slot>
                 </x-ui.button.link>
             </x-slot>
