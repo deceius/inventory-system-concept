@@ -2,26 +2,14 @@
     <x-slot:header>
         <x-ui.header title="{{ __('Edit Brand') }}">
             <x-slot:icon>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z" />
-                  </svg>
-
+                <x-icons.master-data/>
             </x-slot>
             <x-slot:buttons>
                 @if (old('isActive', $brand->is_active))
-                                <form method="post" action="{{ $brand->url . '/deactivate' }}">
-                                    @csrf
-                                    @method('PATCH')
-                                    <x-ui.button type="submit" style="danger" text="{{ __('Deactivate Data') }}">
-                                </x-ui.button>
-                            </form>
-                            @else
-                            <form method="post" action="{{ $brand->url . '/activate' }}">
-                                @csrf
-                                @method('PATCH')
-                                <x-ui.button type="submit" style="success" text="{{ __('Activate Data') }}"></x-ui.button>
-                            </form>
-                    @endif
+                    <x-custom.button.deactivate action="{{ $brand->url . '/deactivate' }}" method="post" text="{{ __('Deactivate')}}"/>
+                @else
+                    <x-custom.button.activate action="{{ $brand->url . '/activate' }}" method="post" text="{{ __('Activate')}}"/>
+                @endif
             </x-slot>
             <x-slot:prev-level>
                 <span>Master Data</span>
