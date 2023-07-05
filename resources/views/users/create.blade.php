@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-ui.page-header title="{{ __('New User') }}">
+        <x-ui.header title="{{ __('New User') }}">
             <x-slot name="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -11,7 +11,7 @@
                 <a class="text-indigo-400 font-light underline" href="{{ route('admin.users.index') }}">User Management</a>
                 <x-icons.breadcrumb></x-icons.breadcrumb>
             </x-slot>
-        </x-ui.page-header>
+        </x-ui.header>
     </x-slot>
 
 
@@ -47,20 +47,20 @@
 
                         <div class="mt-4">
                             <x-ui.input.label for="branch_id" :value="__('Branch')" />
-                            <x-ui.select id="branch_id"
+                            <x-ui.form.select id="branch_id"
                                         class="block mt-1 w-full"
                                         name="branch_id"
                                         required>
                                 @foreach ($branches as $branch)
                                     <option value="{{$branch->id}}">{{ $branch->name }}</option>
                                 @endforeach
-                            </x-ui.select>
+                            </x-ui.form.select>
                             <x-ui.input.error :messages="$errors->get('branch_id')" class="mt-2" />
                         </div>
 
                         <div class="mt-4">
                             <x-ui.input.label for="access_tier" :value="__('Access Level')" />
-                            <x-ui.select id="access_tier"
+                            <x-ui.form.select id="access_tier"
                                         class="block mt-1 w-full"
                                         name="access_tier"
                                         required>
@@ -68,7 +68,7 @@
                                 <option value="2">Manager (2)</option>
                                 <option value="3">Employee (3)</option>
                                 <option value="4">Readonly (4)</option>
-                            </x-ui.select>
+                            </x-ui.form.select>
                             <x-ui.input.error :messages="$errors->get('access_tier')" class="mt-2" />
                         </div>
                         <div class="mt-4">

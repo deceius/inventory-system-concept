@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-ui.page-header title="{{ __('Inventory | Emilia (Silang)') }}">
+        <x-ui.header title="{{ __('Inventory | Emilia (Silang)') }}">
 
             <x-slot name="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -17,7 +17,7 @@
                     </x-slot>
                 </x-ui.button>
             </x-slot>
-        </x-ui.page-header>
+        </x-ui.header>
     </x-slot>
     <div class="py-6">
         <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-6">

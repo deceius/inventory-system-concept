@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-ui.page-header title="{{ __('Dashboard') }}">
+        <x-ui.header title="{{ __('Dashboard') }}">
             <x-slot name="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6a7.5 7.5 0 107.5 7.5h-7.5V6z" />
@@ -24,7 +24,7 @@
                     </x-slot>
                 </x-ui.button>
             </x-slot>
-        </x-ui.page-header>
+        </x-ui.header>
     </x-slot>
 
     <div class="py-6">

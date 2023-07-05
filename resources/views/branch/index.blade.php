@@ -1,21 +1,21 @@
 <x-app-layout>
     <x-slot name="header">
-        <x-ui.page-header title="{{ __('Branch Master Data') }}">
+        <x-ui.header title="{{ __('Branch Master Data') }}">
             <x-slot name="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
                   </svg>
             </x-slot>
             <x-slot name="buttons">
-                <x-ui.button-link href="{{ route('admin.branch.create') }}" style="success" text="{{ __('Create Branch') }}">
+                <x-ui.button.link href="{{ route('admin.branch.create') }}" style="success" text="{{ __('Create Branch') }}">
                     <x-slot name="icon">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                             <path d="M2 4.25A2.25 2.25 0 014.25 2h2.5A2.25 2.25 0 019 4.25v2.5A2.25 2.25 0 016.75 9h-2.5A2.25 2.25 0 012 6.75v-2.5zM2 13.25A2.25 2.25 0 014.25 11h2.5A2.25 2.25 0 019 13.25v2.5A2.25 2.25 0 016.75 18h-2.5A2.25 2.25 0 012 15.75v-2.5zM11 4.25A2.25 2.25 0 0113.25 2h2.5A2.25 2.25 0 0118 4.25v2.5A2.25 2.25 0 0115.75 9h-2.5A2.25 2.25 0 0111 6.75v-2.5zM15.25 11.75a.75.75 0 00-1.5 0v2h-2a.75.75 0 000 1.5h2v2a.75.75 0 001.5 0v-2h2a.75.75 0 000-1.5h-2v-2z" />
                           </svg>
                     </x-slot>
-                </x-ui.button-link>
+                </x-ui.button.link>
             </x-slot>
-        </x-ui.page-header>
+        </x-ui.header>
     </x-slot>
     <div x-data="branchIndex" x-init="loadBranches()">
         <x-ui.toolbar >
@@ -37,7 +37,7 @@
         <div class="py-6">
             <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
                 <template x-if="!isLoading && !result.data.length">
-                    <x-ui.no-data data="{{ __('Branch')}}"></x-ui.no-data>
+                    <x-custom.no-data data="{{ __('Branch')}}"></x-custom.no-data>
                 </template>
                 <div class="grid md:grid-cols-3 gap-4 grid-cols-1">
                     <template x-for="item in result.data">
@@ -51,14 +51,14 @@
                                 </svg>
                             </x-slot>
                             <x-slot name="buttons">
-                                <x-ui.button-link ::href="item.url + '/edit'" style="secondary" text="{{ __('Edit Branch') }}" x-show="item.is_active">
+                                <x-ui.button.link ::href="item.url + '/edit'" style="secondary" text="{{ __('Edit Branch') }}" x-show="item.is_active">
                                     <x-slot name="icon">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                                             <path d="M13.024 9.25c.47 0 .827-.433.637-.863a4 4 0 00-4.094-2.364c-.468.05-.665.576-.43.984l1.08 1.868a.75.75 0 00.649.375h2.158zM7.84 7.758c-.236-.408-.79-.5-1.068-.12A3.982 3.982 0 006 10c0 .884.287 1.7.772 2.363.278.38.832.287 1.068-.12l1.078-1.868a.75.75 0 000-.75L7.839 7.758zM9.138 12.993c-.235.408-.039.934.43.984a4 4 0 004.094-2.364c.19-.43-.168-.863-.638-.863h-2.158a.75.75 0 00-.65.375l-1.078 1.868z" />
                                             <path fill-rule="evenodd" d="M14.13 4.347l.644-1.117a.75.75 0 00-1.299-.75l-.644 1.116a6.954 6.954 0 00-2.081-.556V1.75a.75.75 0 00-1.5 0v1.29a6.954 6.954 0 00-2.081.556L6.525 2.48a.75.75 0 10-1.3.75l.645 1.117A7.04 7.04 0 004.347 5.87L3.23 5.225a.75.75 0 10-.75 1.3l1.116.644A6.954 6.954 0 003.04 9.25H1.75a.75.75 0 000 1.5h1.29c.078.733.27 1.433.556 2.081l-1.116.645a.75.75 0 10.75 1.298l1.117-.644a7.04 7.04 0 001.523 1.523l-.645 1.117a.75.75 0 101.3.75l.644-1.116a6.954 6.954 0 002.081.556v1.29a.75.75 0 001.5 0v-1.29a6.954 6.954 0 002.081-.556l.645 1.116a.75.75 0 001.299-.75l-.645-1.117a7.042 7.042 0 001.523-1.523l1.117.644a.75.75 0 00.75-1.298l-1.116-.645a6.954 6.954 0 00.556-2.081h1.29a.75.75 0 000-1.5h-1.29a6.954 6.954 0 00-.556-2.081l1.116-.644a.75.75 0 00-.75-1.3l-1.117.645a7.04 7.04 0 00-1.524-1.523zM10 4.5a5.475 5.475 0 00-2.781.754A5.527 5.527 0 005.22 7.277 5.475 5.475 0 004.5 10a5.475 5.475 0 00.752 2.777 5.527 5.527 0 002.028 2.004c.802.458 1.73.719 2.72.719a5.474 5.474 0 002.78-.753 5.527 5.527 0 002.001-2.027c.458-.802.719-1.73.719-2.72a5.475 5.475 0 00-.753-2.78 5.528 5.528 0 00-2.028-2.002A5.475 5.475 0 0010 4.5z" clip-rule="evenodd" />
                                         </svg>
                                     </x-slot>
-                                </x-ui.button-link>
+                                </x-ui.button.link>
                                 <form method="post" :action="item.url + '/activate'">
                                     @csrf
                                     @method('PATCH')
@@ -97,11 +97,7 @@
                     </template>
             </div>
             <div class="w-full flex justify-end mt-6" x-show="result.last_page > 1">
-                <nav class="isolate -space-x-px rounded-md shadow-sm">
-                    <template x-for="(link, index) in result.links">
-                        <x-ui.pagination-link x-on:click="loadPage(link.url)" x-text="setPaginationLabel(link.label, index)" index="index" ::class="{ 'bg-white' : !link.active, 'bg-gray-900 text-white' : link.active, 'text-gray-900 hover:bg-gray-100' : !link.active, 'rounded-l-md' : index == 0, 'rounded-r-md' : index == result.data.length - 1 }" ></x-ui.pagination-link>
-                    </template>
-                </nav>
+
             </div>
         </div>
     </div>
