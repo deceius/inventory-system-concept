@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BranchController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ItemsController;
@@ -44,7 +45,15 @@ Route::middleware('auth')->group(function () {
      * Item Settings
      */
      Route::get('/items/settings', [ItemSettingsController::class, 'index'])->name('items.settings.index');
-     Route::get('/items/settings/brands/fetch', [ItemSettingsController::class, 'fetchBrands'])->name('items.settings.brands.fetch');
+
+     Route::get('/items/settings/brands/create', [BrandController::class, 'create'])->name('items.settings.brands.create');
+     Route::get('/items/settings/brands/{brand}/edit', [BrandController::class, 'edit'])->name('items.settings.brands.edit');
+     Route::get('/items/settings/brands/fetch', [BrandController::class, 'fetchBrands'])->name('items.settings.brands.fetch');
+     Route::post('/items/settings/brands/store', [BrandController::class, 'store'])->name('items.settings.brands.store');
+     Route::patch('/items/settings/brands/{brand}/update', [BrandController::class, 'update'])->name('items.settings.brands.update');
+     Route::patch('/items/settings/brands/{brand}/activate', [BrandController::class, 'activate'])->name('items.settings.brands.activate');
+     Route::patch('/items/settings/brands/{brand}/deactivate', [BrandController::class, 'deactivate'])->name('items.settings.brands.deactivate');
+
      Route::get('/items/settings/types/fetch', [ItemSettingsController::class, 'fetchTypes'])->name('items.settings.types.fetch');
 
      /**

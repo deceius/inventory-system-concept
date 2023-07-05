@@ -16,34 +16,14 @@ class ItemSettingsController extends Controller
         return view('item-settings.index');
     }
 
-    public function fetchBrands(Request $request): Response {
-        $search = $request->input('search');
-        $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
-        $brands = Brand::orderBy('is_active', 'desc')
-                    ->orderBy('id', 'asc');
-        if ($search) {
-            $brands->where(function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%' . $search . '%');
-            });
-        }
-        if ($inactive) {
-            $brands->where('is_active', $inactive);
-        }
-        return response(['result' => $brands->paginate(10)]);
-    }
-
     public function fetchTypes(Request $request): Response {
         $search = $request->input('search');
-        $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
         $brands = Type::orderBy('is_active', 'desc')
-                    ->orderBy('id', 'asc');
+                    ->orderBy('id', 'desc');
         if ($search) {
             $brands->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
             });
-        }
-        if ($inactive) {
-            $brands->where('is_active', $inactive);
         }
         return response(['result' => $brands->paginate(10)]);
     }

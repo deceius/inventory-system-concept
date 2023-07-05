@@ -30,7 +30,7 @@ class BranchController extends Controller
         $search = $request->input('search');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
         $branches = Branch::orderBy('is_active', 'desc')
-                    ->orderBy('id', 'asc');
+                    ->orderBy('id', 'desc');
         if ($search) {
             $branches->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', '%' . $search . '%');

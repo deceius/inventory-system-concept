@@ -17,7 +17,7 @@ class ItemsController extends Controller
         $search = $request->input('search');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
         $items = Item::orderBy('is_active', 'desc')
-                    ->orderBy('id', 'asc');
+                    ->orderBy('id', 'desc');
         $items->with('brand');
         $items->with('type');
         if ($search) {

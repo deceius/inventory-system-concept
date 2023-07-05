@@ -42,7 +42,7 @@ class UsersController extends Controller
         $branch = $request->input('branch');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
         $users = User::orderBy('is_active', 'desc')
-                    ->orderBy('id', 'asc');
+                    ->orderBy('id', 'desc');
         if ($search) {
             $users->where(function ($query) use ($search, $branch) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
