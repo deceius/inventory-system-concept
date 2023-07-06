@@ -6,7 +6,7 @@
             </x-slot>
 
             <x-slot:prev-level>
-                <a class="text-indigo-400 font-light underline" href="{{ route('admin.users.index') }}">User Management</a>
+                <a class="text-indigo-400 font-light underline" href="{{ route('admin.users.index') }}">{{ __('User Management') }}</a>
                 <x-icons.breadcrumb/>
             </x-slot>
         </x-ui.header>
@@ -16,9 +16,7 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <x-ui.card>
-                <x-slot:title>
-                    User Information
-                </x-slot>
+                <x-slot:title>{{ __('User Information') }}</x-slot>
                 <x-slot:icon>
                     <x-icons.user-circle/>
                 </x-slot>
@@ -59,10 +57,9 @@
                                         class="block mt-1 w-full"
                                         name="access_tier"
                                         required>
-                                <option value="1">Admin (1)</option>
-                                <option value="2">Manager (2)</option>
-                                <option value="3">Employee (3)</option>
-                                <option value="4">Readonly (4)</option>
+                                @foreach ($tiers as $key => $value)
+                                    <option value="{{$key + 1}}">{{ __($value) }}</option>
+                                @endforeach
                             </x-ui.form.select>
                             <x-ui.form.input.error :messages="$errors->get('access_tier')" class="mt-2" />
                         </div>

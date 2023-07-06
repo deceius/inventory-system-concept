@@ -6,13 +6,13 @@
             </x-slot>
             <x-slot:buttons>
                 @if (old('isActive', $user->is_active))
-                    <x-custom.button.deactivate action="{{ $user->url . '/deactivate' }}" method="post" text="{{ __('Deactivate')}}"/>
+                    <x-custom.button.deactivate action="{{ $user->url . '/deactivate' }}" method="post" text="{{ __('Deactivate') }}"/>
                 @else
-                    <x-custom.button.activate action="{{ $user->url . '/activate' }}" method="post" text="{{ __('Activate')}}"/>
+                    <x-custom.button.activate action="{{ $user->url . '/activate' }}" method="post" text="{{ __('Activate') }}"/>
                 @endif
             </x-slot>
             <x-slot:prev-level>
-                <a class="text-indigo-400 font-light underline" href="{{ route('admin.users.index') }}">User Management</a>
+                <a class="text-indigo-400 font-light underline" href="{{ route('admin.users.index') }}">{{ __('User Management') }}</a>
                 <x-icons.breadcrumb/>
             </x-slot>
         </x-ui.header>
@@ -20,9 +20,7 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <x-ui.card>
-                <x-slot:title>
-                    User Information
-                </x-slot>
+                <x-slot:title>{{ __('User Information') }}</x-slot>
                 <x-slot:icon>
                     <x-icons.user-circle/>
                 </x-slot>
@@ -68,7 +66,7 @@
                                          :disabled="!$user->is_active"
                                         required>
                                 @foreach ($tiers as $key => $value)
-                                    <option value="{{$key + 1}}" {{ $key + 1 == old('access_tier', $user->access_tier) ? 'selected' : ''}}>{{ $value }}</option>
+                                    <option value="{{$key + 1}}" {{ $key + 1 == old('access_tier', $user->access_tier) ? 'selected' : ''}}>{{ __($value) }}</option>
                                 @endforeach
                             </x-ui.form.select>
                             <x-ui.form.input.error :messages="$errors->get('access_tier')" class="mt-2" />

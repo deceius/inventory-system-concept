@@ -16,7 +16,7 @@ class UsersController extends Controller
 {
 
 
-    protected $tiers = ['Admin', 'Manager', 'Employee', 'Read-only'];
+    protected $tiers = ['Admin', 'Manager', 'Team Lead', 'Team Member'];
     // Views
 
     public function index(): View {
@@ -26,7 +26,7 @@ class UsersController extends Controller
 
     public function create(): View {
         $branches = Branch::where('is_active', 1)->get();
-        return view('users.create', ['branches' => $branches]);
+        return view('users.create', ['branches' => $branches, 'tiers' => $this->tiers]);
     }
 
     public function edit(Request $request, User $user): View {

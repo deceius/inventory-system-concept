@@ -6,9 +6,9 @@
             </x-slot>
 
             <x-slot:prev-level>
-                <span>Master Data</span>
+                <span>{{ __('Master Data') }}</span>
                 <x-icons.breadcrumb/>
-                <a class="text-indigo-400 font-light underline" href="{{ route('items.settings.index') }}">Item Settings</a>
+                <a class="text-indigo-400 font-light underline" href="{{ route('items.settings.index') }}">{{ __('Item Settings') }}</a>
                 <x-icons.breadcrumb/>
             </x-slot>
         </x-ui.header>
@@ -18,9 +18,7 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <x-ui.card>
-                <x-slot:title>
-                    Brand Information
-                </x-slot>
+                <x-slot:title>{{ __('Brand Information') }}</x-slot>
                 <x-slot:icon>
                     <x-icons.form/>
                 </x-slot>

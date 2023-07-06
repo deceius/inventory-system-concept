@@ -77,9 +77,9 @@ class User extends Authenticatable
             case 2:
                 return 'Manager';
             case 3:
-                return 'Employee';
+                return 'Team Lead';
             default:
-                return 'Readonly';
+                return 'Team Member';
         }
     }
 }

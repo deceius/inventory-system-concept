@@ -12,7 +12,7 @@
                 @endif
             </x-slot>
             <x-slot:prev-level>
-                <a class="text-indigo-400 font-light underline" href="{{ route('admin.branch.index') }}">Branch Master Data</a>
+                <a class="text-indigo-400 font-light underline" href="{{ route('admin.branch.index') }}">{{ __('Branch Master Data') }}</a>
                 <x-icons.breadcrumb/>
             </x-slot>
         </x-ui.header>
@@ -21,9 +21,7 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <x-ui.card>
-                <x-slot:title>
-                    Branch Information
-                </x-slot>
+                <x-slot:title>{{ __('Branch Information') }}</x-slot>
                 <x-slot:icon>
                     <x-icons.form/>
                 </x-slot>

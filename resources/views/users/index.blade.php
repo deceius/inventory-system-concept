@@ -32,7 +32,7 @@
         <div class="py-6">
             <div class="max-w-8xl mx-auto sm:px-6 lg:px-8">
                 <template x-if="!isLoading && !result.data.length">
-                    <x-custom.no-data data="{{ __('User')}}"></x-custom.no-data>
+                    <x-custom.no-data data="{{ __('User') }}"></x-custom.no-data>
                 </template>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <template x-for="item in result.data">

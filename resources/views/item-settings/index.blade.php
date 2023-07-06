@@ -5,7 +5,7 @@
                 <x-icons.master-data/>
             </x-slot>
             <x-slot:prev-level>
-                <span>Master Data</span>
+                <span>{{ __('Master Data') }}</span>
                 <x-icons.breadcrumb></x-icons.breadcrumb>
             </x-slot>
         </x-ui.header>
@@ -34,7 +34,7 @@
                                     <thead class="font-medium">
                                         <tr class="border-b-2 border-gray-300">
                                             <th scope="col" class="text-start py-3 px-5">
-                                                Name
+                                                {{ __('Name') }}
                                             </th>
                                             <th scope="col" class="text-start py-3 px-5">
                                                 &nbsp;
@@ -83,7 +83,7 @@
                                     <thead class="font-medium">
                                         <tr class="border-b-2 border-gray-300">
                                             <th scope="col" class="text-start py-3 px-5">
-                                                Name
+                                                {{ __('Name') }}
                                             </th>
 
                                             <th scope="col" class="text-start py-3 px-5">

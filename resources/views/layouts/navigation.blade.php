@@ -9,52 +9,13 @@
                         <x-application-logo  class="block h-9 w-auto text-indigo-500" />
                     </a>
                 </div>
-
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-ui.nav.link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-ui.nav.link>
-                    <x-ui.nav.link :href="route('inventory.index')" :active="request()->routeIs('inventory.index')">
-                        {{ __('Inventory') }}
-                    </x-ui.nav.link>
-                    <x-ui.nav.dropdown>
-                        <x-slot:title>{{ __('Transactions') }}</x-slot>
-                        <x-slot:content>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Sales') }}
-                            </x-ui.dropdown.item>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Receiving') }}
-                            </x-ui.dropdown.item>
-                            <x-ui.separator></x-ui.separator>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Transfer') }}
-                            </x-ui.dropdown.item>
-                            </form>
-                        </x-slot>
-                    </x-ui.nav.dropdown>
-                    <x-ui.nav.dropdown>
-                        <x-slot:title>{{ __('Branch Management') }}</x-slot>
-                        <x-slot:content>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Customers') }}
-                            </x-ui.dropdown.item>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Traders') }}
-                            </x-ui.dropdown.item>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Expenses') }}
-                            </x-ui.dropdown.item>
-                            <x-ui.separator></x-ui.separator>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Pricing') }}
-                            </x-ui.dropdown.item>
-                            </form>
-                        </x-slot>
-                    </x-ui.nav.dropdown>
                     <x-ui.nav.dropdown :active="request()->routeIs('items.*')">
-                        <x-slot:title>{{ __('item-settings.nav') }}</x-slot>
+                        <x-slot:title>{{ __('Item Settings') }}</x-slot>
                         <x-slot:content>
                             <x-ui.dropdown.item :href="route('items.index')" :active="request()->routeIs('items.index')">
                                 {{ __('Items') }}
