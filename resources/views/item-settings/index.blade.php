@@ -22,7 +22,7 @@
                     </x-slot>
                     <x-slot:buttons>
                         <x-ui.search model="filter.search" click-method="loadTypes()"/>
-                        <x-ui.button.link href="{{ route('admin.users.create') }}" style="success" text="{{ __('Create Type') }}">
+                        <x-ui.button.link href="{{ route('items.settings.types.create') }}" style="success" text="{{ __('Create Type') }}">
                             <x-slot:icon>
                                 <x-icons.button.create/>
                             </x-slot>
@@ -43,7 +43,7 @@
                                     </thead>
                                     <tbody>
                                         <template x-for="item in result.data">
-                                            <tr class="border-gray-300 text-start" ::class="{ 'opacity-50' : !item.is_active }">
+                                            <tr class="border-gray-300 text-start" :class="{ 'opacity-50' : !item.is_active }">
                                                 <td class="border-b py-3 px-5" x-text='item.name'></td>
                                                 <td class=" whitespace-nowrap border-b py-3 px-5 text-end">
                                                     <x-ui.button.link style="secondary" ::href="item.url + '/edit'">

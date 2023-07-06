@@ -24,6 +24,6 @@ class Type extends Model
     ];
 
     public function getUrlAttribute() {
-        return url('items/settings/type/'.$this->getKey());
+        return url('items/settings/types/'.$this->getKey());
     }
 }

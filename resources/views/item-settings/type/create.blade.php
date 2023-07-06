@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot:header>
-        <x-ui.header title="{{ __('Create Brand') }}">
+        <x-ui.header title="{{ __('Create Type') }}">
             <x-slot:icon>
                 <x-icons.master-data/>
             </x-slot>
@@ -18,12 +18,12 @@
     <div class="py-6">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <x-ui.card>
-                <x-slot:title>{{ __('Brand Information') }}</x-slot>
+                <x-slot:title>{{ __('Type Information') }}</x-slot>
                 <x-slot:icon>
                     <x-icons.form/>
                 </x-slot>
                 <x-slot:content>
-                    <form method="POST" action="{{ route('items.settings.brands.store') }}">
+                    <form method="POST" action="{{ route('items.settings.types.store') }}">
                         @csrf
                         <!-- Name -->
                         <div>

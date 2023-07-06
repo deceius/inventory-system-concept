@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ItemsController;
 use App\Http\Controllers\ItemSettingsController;
+use App\Http\Controllers\TypesController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,7 +55,13 @@ Route::middleware('auth')->group(function () {
      Route::patch('/items/settings/brands/{brand}/activate', [BrandController::class, 'activate'])->name('items.settings.brands.activate');
      Route::patch('/items/settings/brands/{brand}/deactivate', [BrandController::class, 'deactivate'])->name('items.settings.brands.deactivate');
 
-     Route::get('/items/settings/types/fetch', [ItemSettingsController::class, 'fetchTypes'])->name('items.settings.types.fetch');
+     Route::get('/items/settings/types/create', [TypesController::class, 'create'])->name('items.settings.types.create');
+     Route::get('/items/settings/types/{type}/edit', [TypesController::class, 'edit'])->name('items.settings.types.edit');
+     Route::get('/items/settings/types/fetch', [TypesController::class, 'fetchTypes'])->name('items.settings.types.fetch');
+     Route::post('/items/settings/types/store', [TypesController::class, 'store'])->name('items.settings.types.store');
+     Route::patch('/items/settings/types/{type}/update', [TypesController::class, 'update'])->name('items.settings.types.update');
+     Route::patch('/items/settings/types/{type}/activate', [TypesController::class, 'activate'])->name('items.settings.types.activate');
+     Route::patch('/items/settings/types/{type}/deactivate', [TypesController::class, 'deactivate'])->name('items.settings.types.deactivate');
 
      /**
       * Items
