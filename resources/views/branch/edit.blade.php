@@ -36,12 +36,12 @@
                         </div>
                         <div class="mt-4">
                             <x-ui.form.input.label for="tin" :value="__('TIN')" />
-                            <x-ui.form.input.text id="tin" :disabled="!$branch->is_active"  name="tin" :value="old('name', $branch->tin)" type="text" class="mt-1 block w-full" required autofocus autocomplete="tin" />
+                            <x-ui.form.input.text id="tin" :disabled="!$branch->is_active"  name="tin" :value="old('name', $branch->tin)" type="text" class="mt-1 block w-full" autofocus autocomplete="tin" />
                             <x-ui.form.input.error class="mt-2" :messages="$errors->get('tin')" />
                         </div>
                         <div class="mt-4">
                             <x-ui.form.input.label for="address" :value="__('Address')" />
-                            <x-ui.form.input.text id="address" :disabled="!$branch->is_active" name="address" :value="old('name', $branch->address)" type="text" class="mt-1 block w-full" required autofocus autocomplete="address" />
+                            <x-ui.form.input.text id="address" :disabled="!$branch->is_active" name="address" :value="old('name', $branch->address)" type="text" class="mt-1 block w-full" autofocus autocomplete="address" />
                             <x-ui.form.input.error class="mt-2" :messages="$errors->get('address')" />
                         </div>
                         <div class="flex items-center gap-4 mt-4">

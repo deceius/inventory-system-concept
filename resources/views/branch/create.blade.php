@@ -30,12 +30,12 @@
                         </div>
                         <div class="mt-4">
                             <x-ui.form.input.label for="tin" :value="__('TIN')" />
-                            <x-ui.form.input.text id="tin" name="tin" type="text" class="mt-1 block w-full" required autofocus autocomplete="name" />
+                            <x-ui.form.input.text id="tin" name="tin" type="text" class="mt-1 block w-full" autofocus autocomplete="name" />
                             <x-ui.form.input.error class="mt-2" :messages="$errors->get('tin')" />
                         </div>
                         <div class="mt-4">
                             <x-ui.form.input.label for="address" :value="__('Address')" />
-                            <x-ui.form.input.text id="address" name="address" type="text" class="mt-1 block w-full" required autofocus autocomplete="address" />
+                            <x-ui.form.input.text id="address" name="address" type="text" class="mt-1 block w-full" autofocus autocomplete="address" />
                             <x-ui.form.input.error class="mt-2" :messages="$errors->get('address')" />
                         </div>
                         <div class="flex items-center gap-4 mt-4">

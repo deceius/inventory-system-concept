@@ -16,8 +16,8 @@ class BranchStoreRequest extends FormRequest
     public function rules(): array {
         return [
             'name' => ['required', 'string'],
-            'address' => ['required', 'string'],
-            'tin' => ['required', 'string'],
+            'address' => ['string', 'nullable'],
+            'tin' => ['string', 'nullable'],
         ];
     }
 

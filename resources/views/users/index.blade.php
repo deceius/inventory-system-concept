@@ -71,7 +71,7 @@
                                     <div class="flex justify-between h-5 items-center">
                                         <div class="flex space-x-2 items-center">
                                             <x-icons.button.branch/>
-                                            <span x-text="item.branch.name"></span>
+                                            <span x-text="item.branch ? item.branch.name : '--'"></span>
                                         </div>
                                     </div>
 

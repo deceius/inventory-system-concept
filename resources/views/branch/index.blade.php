@@ -58,7 +58,7 @@
                                     <div class="flex justify-between h-5 items-center">
                                         <div class="flex space-x-2 items-center">
                                             <x-icons.button.home/>
-                                            <span x-text="item.address"></span>
+                                            <span x-text="item.address ?? '--'"></span>
                                         </div>
                                     </div>
 
@@ -66,7 +66,7 @@
                                     <div class="flex justify-between h-5 items-center">
                                         <div class="flex space-x-2 items-center">
                                             <x-icons.button.doc-text/>
-                                            <span x-text="item.tin"></span>
+                                            <span x-text="item.tin ?? '--'"></span>
                                         </div>
                                     </div>
                                 </div>
