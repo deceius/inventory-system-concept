@@ -34,7 +34,7 @@
                         <!-- Email Address -->
                         <div class="mt-4">
                             <x-ui.form.input.label for="email" :value="__('Email')" />
-                            <x-ui.form.input.text id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required/>
+                            <x-ui.form.input.text id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"/>
                             <x-ui.form.input.error :messages="$errors->get('email')" class="mt-2" />
                         </div>
 
@@ -42,8 +42,7 @@
                             <x-ui.form.input.label for="branch_id" :value="__('Branch')" />
                             <x-ui.form.select id="branch_id"
                                         class="block mt-1 w-full"
-                                        name="branch_id"
-                                        required>
+                                        name="branch_id">
                                 @foreach ($branches as $branch)
                                     <option value="{{$branch->id}}">{{ $branch->name }}</option>
                                 @endforeach

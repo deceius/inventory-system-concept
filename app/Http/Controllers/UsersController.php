@@ -56,6 +56,12 @@ class UsersController extends Controller
             $users->where('is_active', !$inactive);
         }
 
+        // Validate Branch and Access level
+        if($request->user()->access_tier != 1) {
+            $users->where('access_tier', '>=', $request->user()->access_tier);
+            $users->where('branch_id', $request->user()->branch_id);
+        }
+
         $users->with('branch');
 
         return response(['result' => $users->paginate(9)]);

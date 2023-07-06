@@ -48,8 +48,7 @@
                                         class="block mt-1 w-full"
                                         name="branch_id"
                                         :disabled="!$user->is_active"
-                                        :value="old('branch_id', $user->branch_id)"
-                                        required>
+                                        :value="old('branch_id', $user->branch_id)">
                                 @foreach ($branches as $branch)
                                     <option value="{{$branch->id}}" {{ $branch->id == old('branch_id', $user->branch_id) ? 'selected' : ''}}>{{ $branch->name }}</option>
                                 @endforeach

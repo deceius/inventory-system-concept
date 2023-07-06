@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->unsignedInteger('brand_id');
             $table->unsignedInteger('type_id');
-            $table->string('created_by');
-            $table->string('updated_by')->nullable();
+            $table->unsignedInteger('created_by');
+            $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
             $table->tinyInteger('is_active')->default(1);
         });

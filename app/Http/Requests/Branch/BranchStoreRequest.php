@@ -23,7 +23,7 @@ class BranchStoreRequest extends FormRequest
 
     public function getSanitized(): array {
         $sanitized = $this->validated();
-        $sanitized['created_by'] = $this->user()->email;
+        $sanitized['created_by'] = $this->user()->id;
         return $sanitized;
     }
 

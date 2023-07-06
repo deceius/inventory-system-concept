@@ -21,7 +21,7 @@ class MasterDataUpdateRequest extends FormRequest
 
     public function getSanitized(): array {
         $sanitized = $this->validated();
-        $sanitized['updated_by'] = $this->user()->email;
+        $sanitized['updated_by'] = $this->user()->id;
         return $sanitized;
     }
 

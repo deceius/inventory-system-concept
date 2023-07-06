@@ -17,14 +17,16 @@
         <x-ui.toolbar>
             <div class="space-x-3 flex items-center h-5">
                 <x-ui.search click-method="reloadUsers()" model="filter.search" />
-                  <x-ui.form.select x-model="filter.branch" class="w-full hidden md:block" x-on:change="reloadUsers()">
-                    <option value="">All Branches</option>
-                    @foreach ($branches as $branch)
-                        <option value="{{$branch->id}}">{{ $branch->name }}</option>
-                    @endforeach
-                  </x-ui.form.select>
+                @if(Auth::user()->access_tier == 1)
+                    <x-ui.form.select x-model="filter.branch" class="w-full hidden md:block" x-on:change="reloadUsers()">
+                        <option value="">All Branches</option>
+                        @foreach ($branches as $branch)
+                            <option value="{{$branch->id}}">{{ $branch->name }}</option>
+                        @endforeach
+                    </x-ui.form.select>
+                  @endif
             </div>
-            <label for="remember_me" class="inline-flex items-center">
+            <label for="remember_me" class="inline-flex items-center self-end">
                 <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" x-model="filter.inactive">
                 <span class="ml-2 text-sm text-gray-600">{{ __('Show Inactive Users') }}</span>
             </label>
