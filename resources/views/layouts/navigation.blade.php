@@ -53,20 +53,8 @@
                             </form>
                         </x-slot>
                     </x-ui.nav.dropdown>
-                    <x-ui.nav.dropdown>
-                        <x-slot:title>{{ __('Reports') }}</x-slot>
-                        <x-slot:content>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Item Sales') }}
-                            </x-ui.dropdown.item>
-                            <x-ui.dropdown.item :href="route('profile.edit')">
-                                {{ __('Forecasting') }}
-                            </x-ui.dropdown.item>
-                            </form>
-                        </x-slot>
-                    </x-ui.nav.dropdown>
                     <x-ui.nav.dropdown :active="request()->routeIs('items.*')">
-                        <x-slot:title>{{ __('Master Data') }}</x-slot>
+                        <x-slot:title>{{ __('item-settings.nav') }}</x-slot>
                         <x-slot:content>
                             <x-ui.dropdown.item :href="route('items.index')" :active="request()->routeIs('items.index')">
                                 {{ __('Items') }}

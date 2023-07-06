@@ -32,16 +32,6 @@ export default () => ({
             }
         );
     },
-    setPaginationLabel(label, index){
-        if (index == 0) {
-            return '<';
-        }
-        else if (index == this.result.links.length - 1) {
-            return '>';
-        }
-
-        return label;
-    },
     loadPage(url){
         if (url) {
             this.loadFromUrl(url + '&search=' + this.filter.search + '&inactive=' + this.filter.inactive);
