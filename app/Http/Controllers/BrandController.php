@@ -24,16 +24,14 @@ class BrandController extends Controller
     public function fetchBrands(Request $request): Response {
         $search = $request->input('search');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
-        $brands = Brand::orderBy('is_active', 'desc')
+        $brands = Brand::orderBy('deleted_at', 'asc')
                     ->orderBy('id', 'desc');
         if ($search) {
             $brands->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
             });
         }
-        if ($inactive) {
-            $brands->where('is_active', $inactive);
-        }
+        $brands->withTrashed();
         return response(['result' => $brands->paginate(10)]);
     }
 
@@ -51,17 +49,17 @@ class BrandController extends Controller
         return Redirect::route('items.settings.brands.edit', ['brand' => $brand])->with('status', 'updated');
     }
 
-    public function activate(MasterDataUpdateRequest $request, Brand $brand): RedirectResponse
+    public function activate(MasterDataUpdateRequest $request, $id): RedirectResponse
     {
-        $brand->fill($request->getSanitized());
-        $brand->is_active = 1;
+        $brand = Brand::withTrashed()->find($id);
+        $brand->restore();
         return $this->updateActivation($brand->fill($request->validated()), 'activated');
     }
 
-    public function deactivate(MasterDataUpdateRequest $request, Brand $brand)//: RedirectResponse
+    public function deactivate(MasterDataUpdateRequest $request, Brand $brand): RedirectResponse
     {
         $brand->fill($request->getSanitized());
-        $brand->is_active = 0;
+        $brand->delete();
         return $this->updateActivation($brand, 'deactivated');
     }
 

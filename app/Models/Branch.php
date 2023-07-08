@@ -4,16 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Branch extends Model
 {
+
+    use SoftDeletes;
+
     protected $fillable = [
         'name',
         'address',
         'tin',
         'created_by',
         'updated_by',
-        'is_active'
 
     ];
 
@@ -24,15 +27,15 @@ class Branch extends Model
     ];
 
     protected $appends = [
-        'url'
+        'url',
+        'is_active'
     ];
 
-    protected function isActive(): Attribute
-    {
-        return Attribute::make(
-            get: fn (int $value) => $value == 1
-        );
+
+    public function getIsActiveAttribute() {
+        return $this->deleted_at == null;
     }
+
 
 
     protected function getUrlAttribute() {

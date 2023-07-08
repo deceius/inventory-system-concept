@@ -10,10 +10,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -24,7 +25,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_active',
         'branch_id',
         'access_tier'
     ];
@@ -51,14 +51,13 @@ class User extends Authenticatable
 
     protected $appends = [
         'url',
-        'access_tier_string'
+        'access_tier_string',
+        'is_active'
     ];
 
-    protected function isActive(): Attribute
-    {
-        return Attribute::make(
-            get: fn (string $value) => $value == 1,
-        );
+
+    public function getIsActiveAttribute() {
+        return $this->deleted_at == null;
     }
 
     public function getUrlAttribute() {

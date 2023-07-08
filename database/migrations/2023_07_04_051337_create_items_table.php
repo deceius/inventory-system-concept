@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('created_by');
             $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
-            $table->tinyInteger('is_active')->default(1);
+            $table->softDeletes();
         });
     }
 

@@ -29,7 +29,7 @@ class BranchController extends Controller
     public function fetch(Request $request): Response {
         $search = $request->input('search');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
-        $branches = Branch::orderBy('is_active', 'desc')
+        $branches = Branch::orderBy('deleted_at', 'asc')
                     ->orderBy('id', 'desc');
         if ($search) {
             $branches->where(function ($query) use ($search) {
@@ -38,8 +38,8 @@ class BranchController extends Controller
                 $query->orWhere('tin', 'LIKE', '%' . $search . '%');
             });
         }
-        if (!$inactive) {
-            $branches->where('is_active', !$inactive);
+        if ($inactive) {
+            $branches->withTrashed();
         }
         return response(['result' => $branches->paginate(9)]);
     }
@@ -52,17 +52,17 @@ class BranchController extends Controller
         return Redirect::route('admin.branch.edit', ['branch' => $branch])->with('status', 'branch-updated');
     }
 
-    public function activate(BranchUpdateRequest $request, Branch $branch): RedirectResponse
+    public function activate(BranchUpdateRequest $request, $id): RedirectResponse
     {
-        $branch->fill($request->getSanitized());
-        $branch->is_active = 1;
+        $branch = Branch::withTrashed()->find($id);
+        $branch->restore();
         return $this->updateActivation($branch->fill($request->validated()), 'branch-activated');
     }
 
     public function deactivate(BranchUpdateRequest $request, Branch $branch): RedirectResponse
     {
         $branch->fill($request->getSanitized());
-        $branch->is_active = 0;
+        $branch->delete();
         return $this->updateActivation($branch, 'branch-deactivated');
     }
 

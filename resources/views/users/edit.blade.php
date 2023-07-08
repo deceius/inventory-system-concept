@@ -5,7 +5,7 @@
                 <x-icons.user/>
             </x-slot>
             <x-slot:buttons>
-                @if (old('isActive', $user->is_active))
+                @if (!$user->trashed())
                     <x-custom.button.deactivate action="{{ $user->url . '/deactivate' }}" method="post" text="{{ __('Deactivate') }}"/>
                 @else
                     <x-custom.button.activate action="{{ $user->url . '/activate' }}" method="post" text="{{ __('Activate') }}"/>

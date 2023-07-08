@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->smallInteger('access_tier')->nullable();
             $table->bigInteger('branch_id')->nullable();
-            $table->tinyInteger('is_active')->default(1);
+            $table->softDeletes();
             $table->rememberToken();
             $table->timestamps();
         });

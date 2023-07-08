@@ -24,16 +24,14 @@ class TypesController extends Controller
     public function fetchTypes(Request $request): Response {
         $search = $request->input('search');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
-        $types = Type::orderBy('is_active', 'desc')
+        $types = Type::orderBy('deleted_at', 'asc')
                     ->orderBy('id', 'desc');
         if ($search) {
             $types->where(function ($query) use ($search) {
                 $query->where('name', 'LIKE', '%' . $search . '%');
             });
         }
-        if ($inactive) {
-            $types->where('is_active', $inactive);
-        }
+        $types->withTrashed();
         return response(['result' => $types->paginate(10)]);
     }
 
@@ -51,17 +49,17 @@ class TypesController extends Controller
         return Redirect::route('items.settings.types.edit', ['type' => $type])->with('status', 'updated');
     }
 
-    public function activate(MasterDataUpdateRequest $request, Type $type): RedirectResponse
+    public function activate(MasterDataUpdateRequest $request, $id): RedirectResponse
     {
-        $type->fill($request->getSanitized());
-        $type->is_active = 1;
+        $type = Type::withTrashed()->find($id);
+        $type->restore();
         return $this->updateActivation($type->fill($request->validated()), 'activated');
     }
 
     public function deactivate(MasterDataUpdateRequest $request, Type $type)//: RedirectResponse
     {
         $type->fill($request->getSanitized());
-        $type->is_active = 0;
+        $type->delete();
         return $this->updateActivation($type, 'deactivated');
     }
 

@@ -18,7 +18,7 @@ class ItemSettingsController extends Controller
 
     public function fetchTypes(Request $request): Response {
         $search = $request->input('search');
-        $brands = Type::orderBy('is_active', 'desc')
+        $brands = Type::orderBy('deleted_at', 'asc')
                     ->orderBy('id', 'desc');
         if ($search) {
             $brands->where(function ($query) use ($search) {

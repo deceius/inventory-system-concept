@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class Authenticate extends Middleware
         parent::authenticate($request, $guards);
 
         // Got here? good! it means the user is session authenticated. now we should check if it authorize
-        if (!auth()->user()->is_active) {
+        $user = auth()->user();
+        if ($user->trashed()) {
             auth()->logout();
             $this->unauthenticated($request, $guards);
         }

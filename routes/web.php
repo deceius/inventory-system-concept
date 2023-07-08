@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
      Route::get('/items/settings/brands/fetch', [BrandController::class, 'fetchBrands'])->name('items.settings.brands.fetch');
      Route::post('/items/settings/brands/store', [BrandController::class, 'store'])->name('items.settings.brands.store');
      Route::patch('/items/settings/brands/{brand}/update', [BrandController::class, 'update'])->name('items.settings.brands.update');
-     Route::patch('/items/settings/brands/{brand}/activate', [BrandController::class, 'activate'])->name('items.settings.brands.activate');
+     Route::patch('/items/settings/brands/{id}/activate', [BrandController::class, 'activate'])->name('items.settings.brands.activate');
      Route::patch('/items/settings/brands/{brand}/deactivate', [BrandController::class, 'deactivate'])->name('items.settings.brands.deactivate');
 
      Route::get('/items/settings/types/create', [TypesController::class, 'create'])->name('items.settings.types.create');
@@ -60,7 +60,7 @@ Route::middleware('auth')->group(function () {
      Route::get('/items/settings/types/fetch', [TypesController::class, 'fetchTypes'])->name('items.settings.types.fetch');
      Route::post('/items/settings/types/store', [TypesController::class, 'store'])->name('items.settings.types.store');
      Route::patch('/items/settings/types/{type}/update', [TypesController::class, 'update'])->name('items.settings.types.update');
-     Route::patch('/items/settings/types/{type}/activate', [TypesController::class, 'activate'])->name('items.settings.types.activate');
+     Route::patch('/items/settings/types/{id}/activate', [TypesController::class, 'activate'])->name('items.settings.types.activate');
      Route::patch('/items/settings/types/{type}/deactivate', [TypesController::class, 'deactivate'])->name('items.settings.types.deactivate');
 
      /**
@@ -86,7 +86,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/users/store', [UsersController::class, 'store'])->name('admin.users.store');
     Route::get('/admin/users/{user}/edit', [UsersController::class, 'edit'])->name('admin.users.edit');
     Route::patch('/admin/users/{user}/update', [UsersController::class, 'update'])->name('admin.users.update');
-    Route::patch('/admin/users/{user}/activate', [UsersController::class, 'activate'])->name('admin.users.activate');
+    Route::patch('/admin/users/{id}/activate', [UsersController::class, 'activate'])->name('admin.users.activate');
     Route::patch('/admin/users/{user}/deactivate', [UsersController::class, 'deactivate'])->name('admin.users.deactivate');
 
 
@@ -97,7 +97,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/branch/create', [BranchController::class, 'create'])->name('admin.branch.create');
     Route::get('/admin/branch/{branch}/edit', [BranchController::class, 'edit'])->name('admin.branch.edit');
     Route::patch('/admin/branch/{branch}/update', [BranchController::class, 'update'])->name('admin.branch.update');
-    Route::patch('/admin/branch/{branch}/activate', [BranchController::class, 'activate'])->name('admin.branch.activate');
+    Route::patch('/admin/branch/{id}/activate', [BranchController::class, 'activate'])->name('admin.branch.activate');
     Route::patch('/admin/branch/{branch}/deactivate', [BranchController::class, 'deactivate'])->name('admin.branch.deactivate');
     Route::post('/admin/branch/store', [BranchController::class, 'store'])->name('admin.branch.store');
     Route::get('/admin/branch/fetch', [BranchController::class, 'fetch'])->name('admin.branch.fetch');

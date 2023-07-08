@@ -20,17 +20,17 @@ class UsersController extends Controller
     // Views
 
     public function index(): View {
-        $branches = Branch::where('is_active', 1)->get();
+        $branches = Branch::all();
         return view('users.index', ['branches' => $branches]);
     }
 
     public function create(): View {
-        $branches = Branch::where('is_active', 1)->get();
+        $branches = Branch::all();
         return view('users.create', ['branches' => $branches, 'tiers' => $this->tiers]);
     }
 
     public function edit(Request $request, User $user): View {
-        $branches = Branch::where('is_active', 1)->get();
+        $branches = Branch::all();
         return view('users.edit', ['user' => $user, 'branches' => $branches, 'tiers' => $this->tiers]);
     }
 
@@ -41,7 +41,7 @@ class UsersController extends Controller
         $search = $request->input('search');
         $branch = $request->input('branch');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
-        $users = User::orderBy('is_active', 'desc')
+        $users = User::orderBy('deleted_at', 'asc')
                     ->orderBy('id', 'desc');
         if ($search) {
             $users->where(function ($query) use ($search, $branch) {
@@ -52,14 +52,14 @@ class UsersController extends Controller
         if ($branch){
             $users->where('branch_id', $branch);
         }
-        if (!$inactive) {
-            $users->where('is_active', !$inactive);
+        if ($inactive) {
+            $users->withTrashed();
         }
 
         // Validate Branch and Access level
         if($request->user()->access_tier != 1) {
-            $users->where('access_tier', '>=', $request->user()->access_tier);
-            $users->where('branch_id', $request->user()->branch_id);
+            // $users->where('access_tier', '>=', $request->user()->access_tier);
+            // $users->where('branch_id', $request->user()->branch_id);
         }
 
         $users->with('branch');
@@ -81,17 +81,17 @@ class UsersController extends Controller
         return Redirect::route('admin.users.edit', ['user' => $user])->with('status', 'user-updated');
     }
 
-    public function activate(UserUpdateRequest $request, User $user): RedirectResponse
+    public function activate(UserUpdateRequest $request, $id): RedirectResponse
     {
-        $user->fill($request->validated());
-        $user->is_active = 1;
+        $user = User::withTrashed()->find($id);
+        $user->restore();
         return $this->updateActivation($user->fill($request->validated()), 'user-activated');
     }
 
     public function deactivate(UserUpdateRequest $request, User $user): RedirectResponse
     {
         $user->fill($request->validated());
-        $user->is_active = 0;
+        $user->delete();
         return $this->updateActivation($user, 'user-deactivated');
     }
 

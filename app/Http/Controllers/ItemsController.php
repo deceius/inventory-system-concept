@@ -16,7 +16,7 @@ class ItemsController extends Controller
     public function fetchItems(Request $request): Response {
         $search = $request->input('search');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
-        $items = Item::orderBy('is_active', 'desc')
+        $items = Item::orderBy('deleted_at', 'asc')
                     ->orderBy('id', 'desc');
         $items->with('brand');
         $items->with('type');
@@ -29,7 +29,7 @@ class ItemsController extends Controller
             });
         }
         if ($inactive) {
-            $items->where('is_active', $inactive);
+            $items->withTrashed();
         }
         return response(['result' => $items->paginate(10)]);
     }
