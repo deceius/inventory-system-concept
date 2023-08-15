@@ -77,7 +77,79 @@
                     </form>
                 </x-slot>
             </x-ui.card>
-
+            <x-ui.card.table>
+                <x-slot:title>
+                    {{ __('Price Management') }}
+                </x-slot>
+                <x-slot:icon>
+                    <x-icons.list/>
+                </x-slot>
+                <x-slot:buttons>
+                    <x-ui.button style="success" text="{{ __('Add Branch Price') }}">
+                        <x-slot:icon>
+                            <x-icons.button.create/>
+                        </x-slot>
+                    </x-ui.button>
+                </x-slot>
+                <x-slot:content>
+                    <div class="overflow-x-auto">
+                        <table id="table" class="min-w-full">
+                                <thead class="font-medium">
+                                    <tr class="border-b-2 border-gray-300">
+                                        <th scope="col" class="text-start py-3 px-5">
+                                            {{ __('Branch') }}
+                                        </th>
+                                        <th scope="col" class="text-start py-3 px-5">
+                                            {{ __('Box') }}
+                                        </th>
+                                        <th scope="col" class="text-start py-3 px-5">
+                                            {{ __('Cutting') }}
+                                        </th>
+                                        <th scope="col" class="text-start py-3 px-5">
+                                            &nbsp;
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-gray-300 text-start">
+                                        <td class="border-t py-3 px-5">Main</td>
+                                        <td class="border-t py-3 px-5">250.00</td>
+                                        <td class="border-t py-3 px-5">364.00</td>
+                                        <td class="border-t py-3 px-5"></td>
+                                    </tr>
+                                    <tr class="border-gray-300 text-start">
+                                        <td class="border-t py-3 px-5">Main</td>
+                                        <td class="border-t py-3 px-5">250.00</td>
+                                        <td class="border-t py-3 px-5">364.00</td>
+                                        <td class="border-t py-3 px-5"></td>
+                                    </tr>
+                                    {{-- <template x-for="item in result.data">
+                                        <tr class="border-gray-300 text-start" :class="{ 'opacity-50' : !item.is_active }">
+                                            <td class="border-b py-3 px-5" x-text='item.type.name'></td>
+                                            <td class="border-b py-3 px-5" x-text='getItemFullName(item)'></td>
+                                            <td class=" whitespace-nowrap border-b py-3 px-5 text-end">
+                                                <td class=" whitespace-nowrap border-b py-3 px-5 text-end">
+                                                    <form method="get" :action="item.url + '/edit'"  x-show="item.is_active">
+                                                        <x-ui.button.button-icon type="submit" style="secondary">
+                                                            <x-icons.button.edit/>
+                                                        </x-ui.button>
+                                                    </form>
+                                                    <form method="post" :action="item.url + '/activate'"  x-show="!item.is_active">
+                                                        @csrf
+                                                        @method('PATCH')
+                                                        <x-ui.button.button-icon type="submit" style="success" text="{{ __('Activate') }}">
+                                                            <x-icons.button.check/>
+                                                        </x-ui.button>
+                                                    </form>
+                                                </td>
+                                            </td>
+                                        </tr>
+                                    </template> --}}
+                                </tbody>
+                            </table>
+                    </div>
+                </x-slot>
+            </x-ui.card.table>
         </div>
     </div>
 </x-app-layout>
