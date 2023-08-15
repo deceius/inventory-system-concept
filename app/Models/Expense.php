@@ -5,17 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Brand extends Model
+class Expense extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
-        'name',
+        'description',
+        'cost',
+        'branch_id',
         'created_by',
         'updated_by',
     ];
 
     protected $dates = [
+        'date',
         'created_at',
         'updated_at',
     ];
@@ -32,7 +35,7 @@ class Brand extends Model
 
 
     public function getUrlAttribute() {
-        return url('items/settings/brands/'.$this->getKey());
+        return url('expenses/'.$this->getKey());
     }
 
 }
