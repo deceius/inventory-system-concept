@@ -27,9 +27,15 @@ class Item extends Model
 
 
     protected $appends = [
+        'url',
         'is_active'
     ];
 
+
+
+    public function getUrlAttribute() {
+        return url('items/'.$this->getKey());
+    }
 
     public function getIsActiveAttribute() {
         return $this->deleted_at == null;

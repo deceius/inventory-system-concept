@@ -67,6 +67,12 @@ Route::middleware('auth')->group(function () {
       * Items
       */
      Route::get('/items', [ItemsController::class, 'index'])->name('items.index');
+     Route::get('/items/create', [ItemsController::class, 'create'])->name('items.create');
+     Route::get('/items/{item}/edit', [ItemsController::class, 'edit'])->name('items.edit');
+     Route::patch('/items/{item}/update', [ItemsController::class, 'update'])->name('items.update');
+     Route::patch('/items/{id}/activate', [ItemsController::class, 'activate'])->name('items.activate');
+     Route::patch('/items/{item}/deactivate', [ItemsController::class, 'deactivate'])->name('items.deactivate');
+     Route::post('/items/store', [ItemsController::class, 'store'])->name('items.store');
      Route::get('/items/fetch', [ItemsController::class, 'fetchItems'])->name('items.fetch');
 
 

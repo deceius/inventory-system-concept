@@ -14,8 +14,7 @@ class Authenticate extends Middleware
         parent::authenticate($request, $guards);
 
         // Got here? good! it means the user is session authenticated. now we should check if it authorize
-        $user = auth()->user();
-        if ($user->trashed()) {
+        if (!$this->canLogin(auth()->user())) {
             auth()->logout();
             $this->unauthenticated($request, $guards);
         }
@@ -28,5 +27,10 @@ class Authenticate extends Middleware
     protected function redirectTo(Request $request): ?string
     {
         return $request->expectsJson() ? null : route('login');
+    }
+
+    private function canLogin(User $user) {
+        $user->with('branch');
+        return !$user->trashed() && $user->branch;
     }
 }
