@@ -107,12 +107,14 @@
                                     </tbody>
                                 </table>
                         </div>
-                        <div class="p-6 flex justify-between">
+                        <div class="p-6 flex justify-between" >
                             <label for="remember_me" class="inline-flex items-center self-end">
                                 <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" x-model="filter.inactive">
                                 <span class="ml-2 text-sm text-gray-600">{{ __('Show Deleted Records') }}</span>
                             </label>
-                            <x-ui.pagination links="result.links"/>
+                            <template  x-show="result.last_page > 1">
+                                <x-ui.pagination links="result.links"/>
+                            </template>
                         </div>
                     </x-slot>
                 </x-ui.card>

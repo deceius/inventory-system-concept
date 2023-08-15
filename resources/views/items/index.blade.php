@@ -73,7 +73,7 @@
                                     </tbody>
                                 </table>
                         </div>
-                        <div class="p-6 flex justify-end">
+                        <div class="p-6 flex justify-end" x-show="result.last_page > 1">
                             <x-ui.pagination links="result.links"/>
                         </div>
                     </x-slot>
