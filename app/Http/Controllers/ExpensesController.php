@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Expense\ExpenseStoreRequest;
+use App\Http\Requests\Expense\ExpenseUpdateRequest;
 use App\Models\Branch;
 use App\Models\Expense;
 use Illuminate\Contracts\View\View;
@@ -18,8 +19,24 @@ class ExpensesController extends Controller
     }
 
     public function create(): View {
-        $branches = Branch::all();
-        return view('expenses.create', ['branches' => $branches]);
+        return view('expenses.create');
+    }
+
+    public function edit(Request $request, Expense $expense): View {
+        return view('expenses.edit', ['expense' => $expense]);
+    }
+
+    public function delete(Request $request, Expense $expense): View {
+        $expense->delete();
+        return view('expenses.index');
+    }
+
+
+    public function update(ExpenseUpdateRequest $request, Expense $expense): RedirectResponse
+    {
+        $expense->fill($request->getSanitized());
+        $expense->save();
+        return Redirect::route('expenses.edit', ['expense' => $expense])->with('status', 'updated');
     }
 
     public function store(ExpenseStoreRequest $request): RedirectResponse
@@ -32,15 +49,17 @@ class ExpensesController extends Controller
     public function fetch(Request $request): Response {
         $search = $request->input('search');
         $inactive = filter_var($request->input('inactive'), FILTER_VALIDATE_BOOLEAN);
-        $types = Expense::orderBy('deleted_at', 'asc')
+        $expenses = Expense::orderBy('deleted_at', 'asc')
                     ->orderBy('id', 'desc');
         if ($search) {
-            $types->where(function ($query) use ($search) {
-                $query->where('name', 'LIKE', '%' . $search . '%');
+            $expenses->where(function ($query) use ($search) {
+                $query->where('description', 'LIKE', '%' . $search . '%');
             });
         }
-        $types->withTrashed();
-        return response(['result' => $types->paginate(10)]);
+        if ($inactive) {
+            $expenses->withTrashed();
+        }
+        return response(['result' => $expenses->paginate(10)]);
     }
 
 }

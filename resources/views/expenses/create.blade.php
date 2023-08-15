@@ -2,7 +2,7 @@
     <x-slot:header>
         <x-ui.header title="{{ __('New Expense') }}">
             <x-slot:icon>
-                <x-icons.master-data/>
+                <x-icons.form/>
             </x-slot>
 
             <x-slot:prev-level>

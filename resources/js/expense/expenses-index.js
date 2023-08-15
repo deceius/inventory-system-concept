@@ -5,10 +5,12 @@ export default () => ({
         'inactive': false
     },
     result: [],
-    load() {
-        this.$watch('filter.inactive', () => {
-            this.reload();
-        });
+    load(reload = false) {
+        if (!reload) {
+            this.$watch('filter.inactive', () => {
+                this.load(true);
+            });
+        }
         this.isLoading = true;
         this.result = [];
         let url = '/expenses/fetch?search=' + this.filter.search + '&inactive=' + this.filter.inactive;

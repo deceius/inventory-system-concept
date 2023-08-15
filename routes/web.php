@@ -45,6 +45,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/expenses/fetch', [ExpensesController::class, 'fetch'])->name('expenses.fetch');
     Route::get('/expenses/create', [ExpensesController::class, 'create'])->name('expenses.create');
     Route::post('/expenses/store', [ExpensesController::class, 'store'])->name('expenses.store');
+    Route::get('/expenses/{expense}/edit', [ExpensesController::class, 'edit'])->name('expenses.edit');
+    Route::patch('/expenses/{expense}/update', [ExpensesController::class, 'update'])->name('expenses.update');
+    Route::patch('/expenses/{expense}/delete', [ExpensesController::class, 'delete'])->name('expenses.delete');
 
 });
 

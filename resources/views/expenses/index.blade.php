@@ -5,6 +5,11 @@
                 <x-icons.form/>
             </x-slot>
             <x-slot:buttons>
+                <x-ui.button.link href="{{ route('expenses.create') }}" style="secondary" text="{{ __('Export Data') }}">
+                    <x-slot:icon>
+                        <x-icons.button.doc-text/>
+                    </x-slot>
+                </x-ui.button.link>
                 <x-ui.button.link href="{{ route('expenses.create') }}" style="success" text="{{ __('New Expense') }}">
                     <x-slot:icon>
                         <x-icons.button.create/>
@@ -16,7 +21,6 @@
     <div x-data="expensesIndex" x-init="load()">
         <div class="py-6">
             <div class="max-w-8xl mx-auto sm:px-6 lg:px-8 space-y-6">
-
                 <x-ui.card.table>
                     <x-slot:title>
                         {{ Carbon\Carbon::now()->format('F d, Y')  }} | Branch Expense Summary
@@ -29,7 +33,7 @@
                             <table id="table" class="min-w-full">
                                     <tbody>
                                         <tr class="border-b border-gray-300">
-                                            <th scope="col" class="text-start py-3 px-5" width="20%">
+                                            <th scope="col" class="text-start py-3 px-5" width="30%">
                                                 {{ __('Total Expense Cost') }}
                                             </th>
                                             <td scope="col" class="text-start py-3 px-5">
@@ -96,13 +100,6 @@
                                                                 <x-icons.button.edit/>
                                                             </x-ui.button>
                                                         </form>
-                                                        <form method="post" :action="item.url + '/activate'"  x-show="!item.is_active">
-                                                            @csrf
-                                                            @method('PATCH')
-                                                            <x-ui.button.button-icon type="submit" style="success" text="{{ __('Activate') }}">
-                                                                <x-icons.button.check/>
-                                                            </x-ui.button>
-                                                        </form>
                                                     </td>
                                                 </td>
                                             </tr>
@@ -110,7 +107,11 @@
                                     </tbody>
                                 </table>
                         </div>
-                        <div class="p-6 flex justify-end">
+                        <div class="p-6 flex justify-between">
+                            <label for="remember_me" class="inline-flex items-center self-end">
+                                <input type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" x-model="filter.inactive">
+                                <span class="ml-2 text-sm text-gray-600">{{ __('Show Deleted Records') }}</span>
+                            </label>
                             <x-ui.pagination links="result.links"/>
                         </div>
                     </x-slot>

@@ -35,9 +35,13 @@ class Expense extends Model
     }
 
     public function getLastAttribute() {
+
         $isUpdated = $this->updated_by != null;
         $dateFormat = "Y-m-d h:i:s";
         $user = User::find($isUpdated ? $this->updated_by : $this->created_by);
+        if ($this->deleted_at != null) {
+            return $user->name." deleted: ". $this->deleted_at;
+        }
         $result = $isUpdated ? "last updated: ".$this->updated_at->format($dateFormat) : "created: ".$this->created_at->format($dateFormat);
 
         return $user->name." ".$result;
