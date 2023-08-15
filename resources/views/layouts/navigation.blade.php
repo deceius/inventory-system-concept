@@ -14,6 +14,9 @@
                     <x-ui.nav.link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-ui.nav.link>
+                    <x-ui.nav.link :href="route('expenses.index')" :active="request()->routeIs('expenses.index')">
+                        {{ __('Expenses') }}
+                    </x-ui.nav.link>
                     <x-ui.nav.dropdown :active="request()->routeIs('items.*')">
                         <x-slot:title>{{ __('Item Settings') }}</x-slot>
                         <x-slot:content>

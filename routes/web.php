@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BranchController;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\ExpensesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\ItemsController;
@@ -36,9 +37,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/inventory', [InventoryController::class, 'index'])->name('inventory.index');
 });
 
+/**
+ * Expenses
+ */
+Route::middleware('auth')->group(function () {
+    Route::get('/expenses', [ExpensesController::class, 'index'])->name('expenses.index');
+
+});
 
 /**
- * Master Data
+ * Item Master Data
  */
 Route::middleware('auth')->group(function () {
 
@@ -77,8 +85,9 @@ Route::middleware('auth')->group(function () {
 
 
 });
+
 /**
- * Admin Auth
+ * Admin Settings
  */
 
 Route::middleware('auth')->group(function () {
