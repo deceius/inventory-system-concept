@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
  */
 Route::middleware('auth')->group(function () {
     Route::get('/expenses', [ExpensesController::class, 'index'])->name('expenses.index');
+    Route::get('/expenses/fetch', [ExpensesController::class, 'fetch'])->name('expenses.fetch');
+    Route::get('/expenses/create', [ExpensesController::class, 'create'])->name('expenses.create');
+    Route::post('/expenses/store', [ExpensesController::class, 'store'])->name('expenses.store');
 
 });
 

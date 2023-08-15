@@ -17,7 +17,7 @@ return new class extends Migration
             $table->double('cost');
             $table->date('date');
             $table->unsignedInteger('branch_id');
-            $table->string('remarks');
+            $table->string('remarks')->nullable();
             $table->string('created_by');
             $table->string('updated_by')->nullable();
             $table->timestamps();

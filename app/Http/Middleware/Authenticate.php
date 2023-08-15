@@ -30,7 +30,6 @@ class Authenticate extends Middleware
     }
 
     private function canLogin(User $user) {
-        $user->with('branch');
-        return !$user->trashed() && $user->branch;
+        return !$user->trashed();
     }
 }
