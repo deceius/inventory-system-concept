@@ -11,7 +11,7 @@ A simple multi-branch store management web app that has the following modules:
 - Expenses Management
 - Inventory (WIP)
 
-# Tech used:
+## Tech used
 - PHP
 - Laravel
 - Alpine.js
